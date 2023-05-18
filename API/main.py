@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
+from BD import ConexionBD
+
 
 app = FastAPI()
 
@@ -19,4 +21,5 @@ app.add_middleware(
 
 @app.get('/lista')
 async def root():
+    ConexionBD.consultarEstudiantes()
     return {"message":"hola mi loco"}
