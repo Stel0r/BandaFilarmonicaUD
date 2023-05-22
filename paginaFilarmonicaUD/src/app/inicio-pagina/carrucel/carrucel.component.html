@@ -1,0 +1,38 @@
+<ngb-carousel *ngIf="images" id="MyCarrusel">
+	<ng-template ngbSlide>
+		<div class="picsum-img-wrapper">
+			<img [src]="images[0]" alt="Random first slide" />
+		</div>
+		<div class="carousel-caption">
+			<h3>Orquesta Filarmonica</h3>
+			<p>Universidades Distrital Francisco Jose de Caldas</p>
+		</div>
+	</ng-template>
+	<ng-template ngbSlide>
+		<div class="picsum-img-wrapper">
+			<img [src]="images[1]" alt="Random second slide" />
+		</div>
+		<div class="carousel-caption">
+			<h3>Convocatoria</h3>
+			<p>Para la Convocatoria invitamos a los estudiantes a participar</p>
+		</div>
+	</ng-template>
+	<ng-template ngbSlide>
+		<div class="picsum-img-wrapper">
+			<img [src]="images[2]" alt="Random third slide" />
+		</div>
+		<div class="carousel-caption">
+			<h3>Instrumental</h3>
+			<p>Tenemos una Gran Varidad de instrumentos</p>
+		</div>
+	</ng-template>
+    <ng-template ngbSlide>
+		<div class="picsum-img-wrapper">
+			<img [src]="images[3]" alt="Random third slide" />
+		</div>
+		<div class="carousel-caption">
+			<h3>Creadores del Proyecto</h3>
+			<p>Un poco de las personas que crean esta API.</p>
+		</div>
+	</ng-template>
+</ngb-carousel>

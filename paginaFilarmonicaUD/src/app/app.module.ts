@@ -7,20 +7,22 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ListStudentsComponent } from './list-students/list-students.component';
 import { InicioPaginaComponent } from './inicio-pagina/inicio-pagina.component';
+import { CarrucelComponent } from './inicio-pagina/carrucel/carrucel.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    ListStudentsComponent,
-    InicioPaginaComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        NavbarComponent,
+        ListStudentsComponent,
+        InicioPaginaComponent
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        NgbModule,
+        CarrucelComponent
+    ]
 })
 export class AppModule { }

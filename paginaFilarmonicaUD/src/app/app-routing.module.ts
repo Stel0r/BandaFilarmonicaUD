@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { InicioPaginaComponent } from './inicio-pagina/inicio-pagina.component';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
   {
@@ -10,6 +11,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  bootstrap: [AppComponent]
 })
 export class AppRoutingModule { }
