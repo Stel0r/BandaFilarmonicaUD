@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ListStudentsComponent } from './list-students/list-students.component';
+import { InicioPaginaComponent } from './inicio-pagina/inicio-pagina.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    ListStudentsComponent
+    ListStudentsComponent,
+    InicioPaginaComponent
   ],
   imports: [
     BrowserModule,

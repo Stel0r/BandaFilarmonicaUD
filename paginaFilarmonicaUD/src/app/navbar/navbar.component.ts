@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
-  nombre:string = "diego"
+  nombre:string = "FilarmonicaUD"
   usuarioLogeado : boolean = true
 
   cambiarNombre(){
