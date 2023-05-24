@@ -10,6 +10,8 @@ import { InicioPaginaComponent } from './inicio-pagina/inicio-pagina.component';
 import { CarrucelComponent } from './inicio-pagina/carrucel/carrucel.component';
 import { FormStudentComponent } from './form-student/form-student.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AdminComponent } from './admin/admin.component';
+import { CalendarioComponent } from './calendario/calendario.component';
 
 @NgModule({
     declarations: [
@@ -17,7 +19,9 @@ import { ReactiveFormsModule } from '@angular/forms';
         NavbarComponent,
         ListStudentsComponent,
         InicioPaginaComponent,
-        FormStudentComponent
+        FormStudentComponent,
+        AdminComponent,
+        CalendarioComponent
     ],
     providers: [],
     bootstrap: [AppComponent],
