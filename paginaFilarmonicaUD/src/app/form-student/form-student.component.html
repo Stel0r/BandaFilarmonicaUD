@@ -1,54 +1,41 @@
-<form [formGroup]="StudentForm" (ngSubmit)="onSubmit()" id="formulario">
-  <div class="form-row">
-    <div class="col-md-4 mb-3">
-      <label for="validationTooltip01">Nombres</label>
-      <input type="text" formControlName="nombres" class="form-control" id="validationTooltip01" placeholder="Nombres" value="Mark" required>
-      <div class="valid-tooltip">
-        Looks good!
+<body>
+  <form class="needs-validation" id="formulario" novalidate>
+    <div class="form-row">
+      <div class="col-md-4 mb-3">
+        <label for="validationCustom01">Nombres</label>
+        <input type="text" id="validationCustom01" placeholder="Nombres" required>
       </div>
-    </div>
-    <div class="col-md-4 mb-3">
-      <label for="validationTooltip02">Apellidos</label>
-      <input type="text" formControlName="apellidos" class="form-control" id="validationTooltip02" placeholder="Apellidos" value="Otto" required>
-      <div class="valid-tooltip">
-        Looks good!
+      <div class="col-md-4 mb-3">
+        <label for="validationCustom02">Apellidos</label>
+        <input type="text" id="validationCustom02" placeholder="Apellidos" required>
       </div>
-    </div>
-    <div class="col-md-4 mb-3">
-      <label for="validationTooltipUsername">Username</label>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="validationTooltipUsernamePrepend">@</span>
-        </div>
-        <input type="text" class="form-control" id="validationTooltipUsername" placeholder="Username" aria-describedby="validationTooltipUsernamePrepend" required>
-        <div class="invalid-tooltip">
-          Please choose a unique and valid username.
+      <div class="col-md-4 mb-3">
+        <label for="validationCustomUsername">Correo</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroupPrepend">@</span>
+          </div>
+          <input type="email" id="validationCustomUsername" placeholder="Username" aria-describedby="inputGroupPrepend" required>
         </div>
       </div>
     </div>
-  </div>
-  <div class="form-row">
-    <div class="col-md-6 mb-3">
-      <label for="validationTooltip03">City</label>
-      <input type="text" class="form-control" id="validationTooltip03" placeholder="City" required>
-      <div class="invalid-tooltip">
-        Please provide a valid city.
+    <div class="form-row">
+      <div class="col-md-6 mb-3">
+        <label for="validationCustom03">City</label>
+        <input type="text" id="validationCustom03" placeholder="City" required>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="validationCustom04">State</label>
+        <input type="text" id="validationCustom04" placeholder="State" required>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="validationCustom05">Zip</label>
+        <input type="text" id="validationCustom05" placeholder="Zip" required>
+        <div class="invalid-feedback">
+          Please provide a valid zip.
+        </div>
       </div>
     </div>
-    <div class="col-md-3 mb-3">
-      <label for="validationTooltip04">State</label>
-      <input type="text" class="form-control" id="validationTooltip04" placeholder="State" required>
-      <div class="invalid-tooltip">
-        Please provide a valid state.
-      </div>
-    </div>
-    <div class="col-md-3 mb-3">
-      <label for="validationTooltip05">Zip</label>
-      <input type="text" class="form-control" id="validationTooltip05" placeholder="Zip" required>
-      <div class="invalid-tooltip">
-        Please provide a valid zip.
-      </div>
-    </div>
-  </div>
-  <button class="btn btn-primary" type="submit">Submit form</button>
-</form>
+    <button class="btn btn-primary" type="submit">Submit form</button>
+  </form>
+</body>
