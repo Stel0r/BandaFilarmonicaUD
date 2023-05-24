@@ -8,13 +8,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ListStudentsComponent } from './list-students/list-students.component';
 import { InicioPaginaComponent } from './inicio-pagina/inicio-pagina.component';
 import { CarrucelComponent } from './inicio-pagina/carrucel/carrucel.component';
+import { FormStudentComponent } from './form-student/form-student.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
         AppComponent,
         NavbarComponent,
         ListStudentsComponent,
-        InicioPaginaComponent
+        InicioPaginaComponent,
+        FormStudentComponent
     ],
     providers: [],
     bootstrap: [AppComponent],
@@ -22,7 +25,8 @@ import { CarrucelComponent } from './inicio-pagina/carrucel/carrucel.component';
         BrowserModule,
         AppRoutingModule,
         NgbModule,
-        CarrucelComponent
+        CarrucelComponent,
+        ReactiveFormsModule
     ]
 })
 export class AppModule { }
