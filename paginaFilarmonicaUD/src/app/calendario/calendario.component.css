@@ -1,0 +1,55 @@
+.calendario-container{
+    display: grid;
+    grid-template-columns: repeat(7,100px);
+    text-align: center;
+    border-radius: 5%;
+    overflow: hidden;
+    border:1px solid rgb(198, 208, 245);
+}
+
+.dia-null{
+    aspect-ratio: 1/1;
+    width: 100px;
+    background-color: rgb(230, 237, 255);
+}
+
+
+.dia{
+    aspect-ratio: 1/1;
+    width: 100px;
+    text-align: left;
+    border:1px solid rgb(198, 208, 245);
+    background-color: rgb(248, 250, 255);
+    cursor: pointer;
+}
+
+.dia-select{
+    background-color: rgb(216, 216, 255);
+}
+
+.header{
+    width: 100px;
+    background-color: rgb(237, 242, 255);
+    border: solid 1px rgb(198, 208, 245);
+}
+
+.dia-num-hoy{
+    background-color: rgb(103, 103, 255);
+    font-weight: bold;
+    color: white;
+}
+
+.dia-num{
+    width: 20px;
+    margin: 8px;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    text-align: center;
+    font-size: 14px;
+}
+
+
+.center{
+    display: flex;
+    justify-content: space-evenly;
+}

@@ -142,7 +142,10 @@ insert into personalobra values
                             ("FACIN",0002,"PROR"),
                             ("FACIN",0002,"PROV"),
                             ("FACIN",0002,"PROZ"),
-                            
+                            ("RECTO",0001,"RECT"),
+                            ("VICRE",0001,"VIC1"),
+                            ("VICRE",0001,"VIC2"),
+                            ("VICRE",0001,"VIC3");
 
 
 
