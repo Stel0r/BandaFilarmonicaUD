@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 11g                           */
-/* Created on:     23/05/2023 08:59:04 p. m.                    */
+/* Created on:     25/05/2023 04:43:39 p. m.                    */
 /*==============================================================*/
 
 
@@ -262,7 +262,7 @@ create table CONVOCATORIAESTUDIANTE
 (
    IDOBRA               VARCHAR2(4)          not null,
    CONSEC_              NUMBER(3,0)          not null,
-   CODESTUDIANTE        VARCHAR2(10)         not null,
+   CODESTUDIANTE        VARCHAR2(11)         not null,
    IDINSTRUMENTO        VARCHAR2(4)          not null,
    FECHAINICIO          DATE                 not null,
    FECHAFIN             DATE                 not null,
@@ -345,7 +345,7 @@ create table ESTADOINSTRUMENTO
 /*==============================================================*/
 create table ESTUDIANTE 
 (
-   CODESTUDIANTE        VARCHAR2(10)         not null,
+   CODESTUDIANTE        VARCHAR2(11)         not null,
    CODUNIDAD            VARCHAR2(5)          not null,
    NOMBRE               VARCHAR2(30)         not null,
    APELLIDO             VARCHAR2(30)         not null,
@@ -406,7 +406,7 @@ create table GENEROOBRA
 create table INSTRUMENTO 
 (
    IDINSTRUMENTO        VARCHAR2(4)          not null,
-   FECHAINGRESO         DATE                 not null,
+   NOMINSTRUMENTO       VARCHAR2(40)         not null,
    constraint PK_INSTRUMENTO primary key (IDINSTRUMENTO)
 );
 
@@ -418,7 +418,7 @@ create table INVENTARIOINSTRUMENTO
    CONSECINVENTARIO     NUMBER(4,0)          not null,
    IDINSTRUMENTO        VARCHAR2(4)          not null,
    IDESTADOINSTRUMENTO  VARCHAR2(3)          not null,
-   FECHAINGRESO         DATE                 not null,
+   NOMINSTRUMENTO       VARCHAR2(40)         not null,
    constraint PK_INVENTARIOINSTRUMENTO primary key (CONSECINVENTARIO)
 );
 
@@ -570,7 +570,7 @@ create table PARTICIPACIONESTUDIANTE
    IDOBRA               VARCHAR2(4)          not null,
    IDTIPOCALEN          VARCHAR2(2)          not null,
    CONSECCALENDARIO     NUMBER(4,0)          not null,
-   CODESTUDIANTE        VARCHAR2(10)         not null,
+   CODESTUDIANTE        VARCHAR2(11)         not null,
    constraint PK_PARTICIPACIONESTUDIANTE primary key (CONSECASIS)
 );
 
