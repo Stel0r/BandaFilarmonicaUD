@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup,Validators  } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-student',
@@ -7,11 +8,29 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./form-student.component.css']
 })
 export class FormStudentComponent {
-  StudentForm = new FormGroup({
-    nombres: new FormControl(''),
-    apellidos: new FormControl('')
-  });
-  onSubmit(){
-    console.warn(this.StudentForm.value)
+
+
+  formulario!: FormGroup;
+  constructor(private fb:FormBuilder,private router:Router){}
+
+  ngOnInit(){
+    this.crearFormulario()
+  }
+
+  proyecto:Array<string> = ["Ingenieria Industrial","Ingenieria Mecanica"]
+
+  enviarFormulario(){
+    this.router.navigate([''])
+  }
+
+  crearFormulario(){
+    this.formulario = this.fb.group({
+      nombre:['',Validators.required],
+      apellido:['',Validators.required],
+      codigo:['',Validators.required],
+      correoP:['',Validators.compose([Validators.required,Validators.email])],
+      proyecto:['',Validators.required],
+      facultad:['',Validators.required]
+    })
   }
 }
