@@ -34,7 +34,7 @@ app.add_middleware(
 @app.get('/lista')
 async def root():
     result = ConexionBD.consultarEstudiantes()
-    return {"message":"hola mi loco"}
+    return {"data":result}
 
 @app.post('/agregar')
 async def root(s:estudiante):

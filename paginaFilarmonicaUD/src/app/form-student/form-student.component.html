@@ -43,15 +43,14 @@
       </div>
       <div class="col-md-4 mb-3">
         <label for="validationCustomUsername">Facultad</label>
-        <select for="validationCustom02" formControlName = "facultad">
-          <option value="Ingenieria" selected>Facultad de Ingenieria</option>
-          <option value="Artes">Facultad de Artes ASAB</option>
+        <select id = "select" for="validationCustom02" formControlName = "facultad" (change) = "arroz()">
+          <option *ngFor="let facultad of listaProyectos.keys()" [value]="facultad" selected>{{facultad}}</option>
         </select>
       </div>
       <div class="col-md-4 mb-3">
         <label for="validationCustomUsername">Proyecto</label>
         <select for="validationCustom02" formControlName = "proyecto">
-          <option [value]="i" *ngFor = "let i of proyecto">{{i}}</option>
+          <option [value]="i" *ngFor = "let i of listaProyectos.get(proyectoSeleccionado)">{{i}}</option>
         </select>
       </div>
     </div>

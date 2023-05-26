@@ -15,12 +15,29 @@ export class FormStudentComponent {
 
   ngOnInit(){
     this.crearFormulario()
+    this.listaProyectos.set("Ingenieria",["sistemas","mamadas"])
+    this.listaProyectos.set("artes",["danzas","microtrafico"])
   }
 
-  proyecto:Array<string> = ["Ingenieria Industrial","Ingenieria Mecanica"]
+  proyectoSeleccionado = "ingenieria"
+  listaProyectos:Map<string,Array<string>> = new Map()
 
   enviarFormulario(){
     this.router.navigate([''])
+  }
+
+  /**
+   * this.http.post("http://127.0.0.1:8000/validate",this.formulario.value).subscribe(
+      {
+        next: res => this.completarLogIn(res.codigo,res.message),
+        error: err => this.completarLogIn(404,"Hubo un Error con el servidor, Intentalo nuevamente")
+      })
+   */
+
+  arroz(){
+    let select = document.getElementById("select") as HTMLSelectElement
+    console.log(select.value)
+    this.proyectoSeleccionado = select.value
   }
 
   crearFormulario(){
