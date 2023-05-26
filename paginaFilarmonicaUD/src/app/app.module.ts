@@ -12,6 +12,7 @@ import { FormStudentComponent } from './form-student/form-student.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminComponent } from './admin/admin.component';
 import { CalendarioComponent } from './calendario/calendario.component';
+import { LiquidacionEstudianteComponent } from './liquidacion-estudiante/liquidacion-estudiante.component';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,8 @@ import { CalendarioComponent } from './calendario/calendario.component';
         InicioPaginaComponent,
         FormStudentComponent,
         AdminComponent,
-        CalendarioComponent
+        CalendarioComponent,
+        LiquidacionEstudianteComponent
     ],
     providers: [],
     bootstrap: [AppComponent],

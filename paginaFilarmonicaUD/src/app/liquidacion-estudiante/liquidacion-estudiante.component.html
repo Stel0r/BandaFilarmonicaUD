@@ -1,0 +1,44 @@
+<blockquote class="blockquote text-center">
+    <p class="mb-3 h3">Viátivos Periodos XXXX.</p>
+    <footer class="blockquote-footer">Liquidación <cite title="Source Title">Estudiantes</cite></footer>
+</blockquote>
+
+<table class="table table-dark shadow-lg p-3 mb-5 bg-white rounded">
+    <thead>
+      <tr>
+        <th scope="col">Estudiante</th>
+        <th scope="col">Codigo</th>
+        <th scope="col">Facultad</th>
+        <th scope="col"># de Horas</th>
+      </tr>
+    </thead>
+    <tbody>
+        <!--
+        <tr *ngFor = "let estudiante of listaEstudiantes">
+        <th scope="row">{{estudiante[2] + " " + estudiante[3]}}</th>
+        <td>{{estudiante[0]}}</td>
+        <td>{{estudiante[6]}}</td>
+        <td>{{estudiante[1]}}</td>
+        </tr>
+        -->
+        <tr>
+            <td>Diego Gamez</td>
+            <td>20201020009</td>
+            <td>Faculdad de Ingenieria</td>
+            <td>7</td>
+        </tr>
+    </tbody>
+  </table>
+
+<div class="input-group mb-3 d-flex justify-content-center">
+    <button (click)="crearPDF()" class="btn btn-primary" > Generar PDF</button>
+</div>
+
+<blockquote class="blockquote text-center">
+  <p class="mb-3 h3">Electiva SinfonicaUD.</p>
+  <footer class="blockquote-footer">Liquidación <cite title="Source Title">Estudiantes</cite></footer>
+</blockquote>
+
+<div class="input-group mb-3 d-flex justify-content-center">
+  <button (click)="enviarCorreo()" class="btn btn-primary" > Enviar Correo</button>
+</div>

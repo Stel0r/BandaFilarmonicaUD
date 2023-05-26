@@ -3,6 +3,12 @@ from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
 from BD import ConexionBD
+from Correo import CorreoSer
+
+class correo(BaseModel):
+    asunto:str
+    contenidos:str
+    remitente:str
 
 class estudiante(BaseModel):
     apellido:str
@@ -39,6 +45,10 @@ async def root():
 
 @app.post('/agregarEstudiantes')
 async def root(s:estudiante):
-    print(s.apellido)
     result = ConexionBD.agregarEstudiante(str(s.codigo), s.proyecto, s.nombre, s.apellido, s.fInscripcion, s.fNacimiento, s.correoP)
+    return {"message":"hola mi loco"}
+
+@app.post('/enviarCorreo')
+async def root(s:correo):
+    result = CorreoSer.enviarCorreo(s.asunto,s.contenidos,s.remitente)
     return {"message":"hola mi loco"}
