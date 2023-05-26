@@ -15,12 +15,21 @@ export class FormStudentComponent {
 
   ngOnInit(){
     this.crearFormulario()
+    this.listaProyectos.set("Ingenieria",["sistemas","mamadas"])
+    this.listaProyectos.set("artes",["danzas","microtrafico"])
   }
 
-  proyecto:Array<string> = ["Ingenieria Industrial","Ingenieria Mecanica"]
+  proyectoSeleccionado = "ingenieria"
+  listaProyectos:Map<string,Array<string>> = new Map()
 
   enviarFormulario(){
     this.router.navigate([''])
+  }
+
+  arroz(){
+    let select = document.getElementById("select") as HTMLSelectElement
+    console.log(select.value)
+    this.proyectoSeleccionado = select.value
   }
 
   crearFormulario(){

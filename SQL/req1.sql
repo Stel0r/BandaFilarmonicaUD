@@ -161,7 +161,7 @@ insert into laborpersonalobra values(0007,'VICRE',0001,'VIC3',0001,2023,'AUXIN',
 
 
 
-
+commit;
 
 
 
