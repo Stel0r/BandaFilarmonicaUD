@@ -11,6 +11,7 @@ class ConexionBD:
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM estudiante")
         result = cursor.fetchall()
+        connection.close()
         return result
 
     def agregarEstudiante(id,codigoProyecto,codigoDocumento,nombres,apellidos,fechaNacimiento,codigoEstudiante,numDocumento,correoPersonal,correoInstitucional,telefono):
