@@ -5,17 +5,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from BD import ConexionBD
 
 class estudiante(BaseModel):
-    id:str
-    codigoProyecto:str
-    codigoDocumento:str
-    nombres:str
-    apellidos:str
-    fechaNacimiento:str
-    codigoEstudiante:str
-    numDocumento:str
-    correoPersonal:str
-    correoInstitucional:str
-    telefono:str
+    apellido:str
+    codigo:int
+    correoP:str
+    fInscripcion:str
+    fNacimiento:str
+    nombre:str
+    proyecto:str
 
 app = FastAPI()
 
@@ -43,5 +39,6 @@ async def root():
 
 @app.post('/agregarEstudiantes')
 async def root(s:estudiante):
-    result = ConexionBD.agregarEstudiante(s.id, s.codigoProyecto, s.codigoDocumento, s.nombres, s.apellidos, s.fechaNacimiento, s.codigoEstudiante, s.numDocumento, s.correoPersonal, s.correoInstitucional, s.telefono)
+    print(s.apellido)
+    result = ConexionBD.agregarEstudiante(str(s.codigo), s.proyecto, s.nombre, s.apellido, s.fInscripcion, s.fNacimiento, s.correoP)
     return {"message":"hola mi loco"}

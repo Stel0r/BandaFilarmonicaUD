@@ -14,12 +14,13 @@ class ConexionBD:
         connection.close()
         return result
 
-    def agregarEstudiante(id,codigoProyecto,codigoDocumento,nombres,apellidos,fechaNacimiento,codigoEstudiante,numDocumento,correoPersonal,correoInstitucional,telefono):
+    def agregarEstudiante(codigoEstudiante, codigoProyecto, nombres, apellidos, fechaInscripcion, fechaNacimiento, correoPersonal):
+        oracledb.init_oracle_client()
         connection = oracledb.connect(user=ConexionBD.user, password=ConexionBD.password,host="localhost", port=1521, service_name="xe")
         cursor = connection.cursor()
-        query = "INSERT INTO estudiante values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);"
-        args = (id,codigoProyecto,codigoDocumento,nombres,apellidos,fechaNacimiento,codigoEstudiante,numDocumento,correoPersonal,correoInstitucional,telefono)
-        result = cursor.update(query,args)
+        query = "INSERT INTO estudiante values('"+codigoEstudiante+"','"+codigoProyecto+"','"+nombres+"','"+apellidos+"',to_date('"+fechaInscripcion+"','yyyy-mm-dd'),to_date('"+fechaNacimiento+"','yyyy-mm-dd'),'"+correoPersonal+"')"
+        result = cursor.execute(query)
+        connection.commit()
         connection.close()
         return result
 

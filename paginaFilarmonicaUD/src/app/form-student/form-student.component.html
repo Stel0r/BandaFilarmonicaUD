@@ -51,14 +51,14 @@
       </div>
       <div class="col-md-4 mb-3">
         <label for="validationCustomUsername">Facultad</label>
-        <select id = "select" for="validationCustom02" formControlName = "facultad" (change) = "arroz()">
+        <select id = "select" for="validationCustom02" (change) = "arroz()">
           <option *ngFor="let facultad of listaUnidades.keys()" [value]="facultad" selected>{{facultad}}</option>
         </select>
       </div>
       <div class="col-md-4 mb-3">
         <label for="validationCustomUsername">Proyecto</label>
         <select for="validationCustom02" formControlName = "proyecto">
-          <option [value]="i" *ngFor = "let i of listaUnidades.get(proyectoSeleccionado)">{{i}}</option>
+          <option [value]="this.codigos.get(i)" *ngFor = "let i of listaUnidades.get(proyectoSeleccionado)">{{i}}</option>
         </select>
       </div>
     </div>

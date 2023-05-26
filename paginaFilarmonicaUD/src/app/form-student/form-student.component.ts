@@ -14,6 +14,7 @@ export class FormStudentComponent {
 
   formulario!: FormGroup;
   listaUnidades : Map<string,Array<string>> = new Map()
+  codigos: Map<string,string> = new Map()
   proyectoSeleccionado = "ingenieria"
   hayError:boolean = false;
   mensajeError:string;
@@ -32,6 +33,7 @@ export class FormStudentComponent {
           } else {
             this.listaUnidades.get(unidad[0])?.push(unidad[1])
           }
+          this.codigos.set(unidad[1],unidad[2])
         }
       },
       error: (error) => {
@@ -46,13 +48,13 @@ export class FormStudentComponent {
   }
 
   enviarFormulario(){
+    console.log(this.formulario.value)
     this.hayError = false
-    console.log(this.formulario.controls['fInscripcion'].value)
 
-    this.http.post("http://127.0.0.1:8000/validate",this.formulario.value).subscribe(
+    this.http.post("http://127.0.0.1:8000/agregarEstudiantes",this.formulario.value).subscribe(
       {
-        next: res => console.log(""),
-        error: err => console.log(404,"Hubo un Error con el servidor, Intentalo nuevamente")
+        next: res => this.mostrarError("Envio exitoso!!!!"),
+        error: err => this.mostrarError("Error al enviar el formulario")
       })
   }
 
@@ -72,14 +74,13 @@ export class FormStudentComponent {
 
   crearFormulario(){
     this.formulario = this.fb.group({
+      codigo:['',Validators.required],
+      proyecto:['',Validators.required],
       nombre:['',Validators.required],
       apellido:['',Validators.required],
-      codigo:['',Validators.required],
-      correoP:['',Validators.compose([Validators.required,Validators.email])],
       fInscripcion:['',Validators.required],
       fNacimiento:['',Validators.required],
-      proyecto:['',Validators.required],
-      facultad:['',Validators.required]
+      correoP:['',Validators.compose([Validators.required,Validators.email])]
     })
   }
 }
