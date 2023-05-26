@@ -31,12 +31,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get('/lista')
+@app.get('/listaEstudiantes')
 async def root():
     result = ConexionBD.consultarEstudiantes()
     return {"data":result}
 
-@app.post('/agregar')
+@app.get('/listaUnidades')
+async def root():
+    result = ConexionBD.consultarUnidades()
+    return {"data":result}
+
+@app.post('/agregarEstudiantes')
 async def root(s:estudiante):
     result = ConexionBD.agregarEstudiante(s.id, s.codigoProyecto, s.codigoDocumento, s.nombres, s.apellidos, s.fechaNacimiento, s.codigoEstudiante, s.numDocumento, s.correoPersonal, s.correoInstitucional, s.telefono)
     return {"message":"hola mi loco"}

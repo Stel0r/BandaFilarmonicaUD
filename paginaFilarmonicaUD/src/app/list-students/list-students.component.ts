@@ -15,7 +15,7 @@ export class ListStudentsComponent {
 
 
   ngOnInit(){
-    this.http.get<estudianteResponse>("http://127.0.0.1:8000/lista").subscribe({
+    this.http.get<estudianteResponse>("http://127.0.0.1:8000/listaEstudiantes").subscribe({
       next:(res)=>{
         this.listaEstudiantes = res.data
         console.log(this.listaEstudiantes)

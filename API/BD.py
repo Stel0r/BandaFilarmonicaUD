@@ -23,4 +23,13 @@ class ConexionBD:
         connection.close()
         return result
 
+    def consultarUnidades():
+        oracledb.init_oracle_client()
+        connection = oracledb.connect(user= ConexionBD.user, password=ConexionBD.password,host="localhost", port=1521, service_name="xe")
+        cursor = connection.cursor()
+        cursor.execute("select f.nomunidad, p.nomunidad, p.codunidad from unidad f, unidad p where f.codunidad = p.uni_codunidad and f.tipounidad like 'AC'")
+        result = cursor.fetchall()
+        connection.close()
+        return result
+
 

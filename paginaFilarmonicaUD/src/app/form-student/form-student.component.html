@@ -20,7 +20,7 @@
       <div class="col-md-4 mb-3">
         <label for="validationCustom02">Codigo</label>
         <input
-          type="text"
+          type="number"
           id="validationCustom04"
           placeholder="Codigo"
           formControlName = "codigo"
@@ -42,15 +42,23 @@
         </div>
       </div>
       <div class="col-md-4 mb-3">
+        <label for="validationCustomUsername">Fecha de Inscripcion</label>
+        <input formControlName="fInscripcion" type="date">
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="validationCustomUsername">Fecha de Nacimiento</label>
+        <input formControlName="fNacimiento" type="date">
+      </div>
+      <div class="col-md-4 mb-3">
         <label for="validationCustomUsername">Facultad</label>
         <select id = "select" for="validationCustom02" formControlName = "facultad" (change) = "arroz()">
-          <option *ngFor="let facultad of listaProyectos.keys()" [value]="facultad" selected>{{facultad}}</option>
+          <option *ngFor="let facultad of listaUnidades.keys()" [value]="facultad" selected>{{facultad}}</option>
         </select>
       </div>
       <div class="col-md-4 mb-3">
         <label for="validationCustomUsername">Proyecto</label>
         <select for="validationCustom02" formControlName = "proyecto">
-          <option [value]="i" *ngFor = "let i of listaProyectos.get(proyectoSeleccionado)">{{i}}</option>
+          <option [value]="i" *ngFor = "let i of listaUnidades.get(proyectoSeleccionado)">{{i}}</option>
         </select>
       </div>
     </div>
