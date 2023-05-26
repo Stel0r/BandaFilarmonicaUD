@@ -1,17 +1,22 @@
-<h2>Listado de Estudiantes</h2>
-<table class="table table-dark">
+<blockquote class="blockquote text-center">
+  <p class="mb-3 h2">Listado de estudiantes Orquesta Filarmonica.</p>
+  <footer class="blockquote-footer">Univerdidad Distrital <cite title="Source Title">Francisco Jose de Caldas</cite></footer>
+</blockquote>
+<table class="table table-dark shadow-lg p-3 mb-5 bg-white rounded">
     <thead>
       <tr>
         <th scope="col">Estudiante</th>
         <th scope="col">Codigo</th>
         <th scope="col">Correo</th>
+        <th scope="col">Proyecto Curricular</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor = "let estudiante of listaEstudiantes">
-        <th scope="row">{{estudiante[2]}}</th>
+        <th scope="row">{{estudiante[2] + " " + estudiante[3]}}</th>
         <td>{{estudiante[0]}}</td>
         <td>{{estudiante[6]}}</td>
+        <td>{{estudiante[1]}}</td>
       </tr>
     </tbody>
   </table>

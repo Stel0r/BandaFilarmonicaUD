@@ -9,7 +9,7 @@ class ConexionBD:
         oracledb.init_oracle_client()
         connection = oracledb.connect(user= ConexionBD.user, password=ConexionBD.password,host="localhost", port=1521, service_name="xe")
         cursor = connection.cursor()
-        cursor.execute("SELECT * FROM estudiante")
+        cursor.execute("select e.codestudiante, u.nomunidad, e.nombre, e.apellido, e.fechainscripcion, e.fechanacimiento, e.correo from estudiante e, unidad u where u.codunidad = e.codunidad")
         result = cursor.fetchall()
         connection.close()
         return result

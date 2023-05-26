@@ -1,68 +1,99 @@
-<body>
-  <form class="needs-validation" id="formulario" novalidate [formGroup] = "formulario">
-    <div class="form-row">
-      <div class="col-md-4 mb-3">
-        <label for="validationCustom01">Nombres</label>
+<body style="padding-top: 4%;">
+  <form id="formulario" novalidate [formGroup] = "formulario" class="shadow-lg p-3 mb-5 bg-white rounded">
+    <blockquote class="blockquote text-center">
+      <p class="mb-3 h3">Formulario de Inscripcion Estudiantes.</p>
+      <footer class="blockquote-footer">Orquesta Filarmonica <cite title="Source Title">UD</cite></footer>
+    </blockquote>
+      <div class="input-group mb-3 d-flex justify-content-center">
+        <div class="input-group-prepend" style="width: 15%;">
+          <label class="input-group-text" id="inputGroupSelect01">Nombres</label>
+        </div>
         <input
           type="text"
           placeholder="Nombres"
           formControlName = "nombre"
+          style="width: 50%;"
         />
       </div>
-      <div class="col-md-4 mb-3">
-        <label for="validationCustom02">Apellidos</label>
+      <div class="input-group mb-3 d-flex justify-content-center">
+        <div class="input-group-prepend" style="width: 15%;">
+          <label class="input-group-text" id="inputGroupSelect02">Apellidos</label>
+        </div>
         <input
           type="text"
           placeholder="Apellidos"
           formControlName = "apellido"
+          style="width: 50%;"
         />
       </div>
-      <div class="col-md-4 mb-3">
-        <label for="validationCustom02">Codigo</label>
+      <div class="input-group mb-3 d-flex justify-content-center">
+        <div class="input-group-prepend" style="width: 15%;">
+          <label class="input-group-text" id="inputGroupSelect03">Codigo</label>
+        </div>
         <input
           type="number"
           id="validationCustom04"
           placeholder="Codigo"
           formControlName = "codigo"
+          style="width: 50%;"
         />
       </div>
-      <div class="col-md-4 mb-3">
-        <label for="validationCustomUsername">Correo Personal</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroupPrepend">@</span>
-          </div>
-          <input
-            type="email"
-            id="validationCustomUsername"
-            placeholder="Username"
-            aria-describedby="inputGroupPrepend"
-            formControlName = "correoP"
-          />
+      <div class="input-group mb-3 d-flex justify-content-center">
+        <div class="input-group-prepend" style="width: 15%;">
+         <span class="input-group-text" id="inputGroupPrepend">Correo @</span>
         </div>
+        <input
+          type="email"
+          id="validationCustomUsername"
+          placeholder="Username"
+          aria-describedby="inputGroupPrepend"
+          formControlName = "correoP"
+          style="width: 50%;"
+          />
       </div>
-      <div class="col-md-4 mb-3">
-        <label for="validationCustomUsername">Fecha de Inscripcion</label>
-        <input formControlName="fInscripcion" type="date">
+      <div class="input-group mb-3 d-flex justify-content-center">
+        <div class="input-group-prepend" style="width: 25%;">
+          <label class="input-group-text" id="inputGroupSelect03">Fecha de Inscripcion</label>
+        </div>
+        <input 
+        formControlName="fInscripcion" 
+        aria-describedby="inputGroupPrepend"
+        style="width: 40%;"
+        type="date"
+        >
       </div>
-      <div class="col-md-4 mb-3">
-        <label for="validationCustomUsername">Fecha de Nacimiento</label>
-        <input formControlName="fNacimiento" type="date">
+      <div class="input-group mb-3 d-flex justify-content-center">
+        <div class="input-group-prepend" style="width: 25%;">
+          <label class="input-group-text" id="inputGroupSelect03">Fecha de Nacimiento</label>
+        </div>
+        <input 
+        formControlName="fNacimiento" 
+        aria-describedby="inputGroupPrepend"
+        style="width: 40%;"
+        type="date"
+        >
       </div>
-      <div class="col-md-4 mb-3">
-        <label for="validationCustomUsername">Facultad</label>
-        <select id = "select" for="validationCustom02" (change) = "arroz()">
+      <div class="input-group mb-3 d-flex justify-content-center">
+        <div class="input-group-prepend" style="width: 20%;">
+          <label class="input-group-text" id="inputGroupSelect03">Facultad</label>
+        </div>
+        <select id = "select" for="validationCustom02" (change) = "arroz()" class="custom-select" aria-describedby="inputGroupPrepend"
+        style="width: 45%;">
           <option *ngFor="let facultad of listaUnidades.keys()" [value]="facultad" selected>{{facultad}}</option>
         </select>
       </div>
-      <div class="col-md-4 mb-3">
-        <label for="validationCustomUsername">Proyecto</label>
-        <select for="validationCustom02" formControlName = "proyecto">
+      <div class="input-group mb-3 d-flex justify-content-center">
+        <div class="input-group-prepend" style="width: 20%;">
+          <label class="input-group-text" id="inputGroupSelect03">Proyecto Curricular</label>
+        </div>
+        <select for="validationCustom02" formControlName = "proyecto" class="custom-select" aria-describedby="inputGroupPrepend"
+        style="width: 45%;">
           <option [value]="this.codigos.get(i)" *ngFor = "let i of listaUnidades.get(proyectoSeleccionado)">{{i}}</option>
         </select>
       </div>
-    </div>
-    <button [disabled]="!formulario.valid" class="btn btn-primary" (click)="enviarFormulario()">Aceptar</button>
+      <div class="input-group mb-3 d-flex justify-content-center">
+        <button [disabled]="!formulario.valid" class="btn btn-primary" style="width: 50%;" (click)="enviarFormulario()">Aceptar</button>
+      </div>
   </form>
   <div *ngIf="this.hayError" class="alert alert-danger error" role="alert" >
     {{this.mensajeError}}
