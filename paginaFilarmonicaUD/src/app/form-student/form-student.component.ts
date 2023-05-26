@@ -15,6 +15,8 @@ export class FormStudentComponent {
   formulario!: FormGroup;
   listaUnidades : Map<string,Array<string>> = new Map()
   proyectoSeleccionado = "ingenieria"
+  hayError:boolean = false;
+  mensajeError:string;
 
   constructor(private fb:FormBuilder,private router:Router, private http:HttpClient){}
 
@@ -38,7 +40,13 @@ export class FormStudentComponent {
     })
   }
 
+  mostrarError(mensaje:string){
+    this.hayError = true
+    this.mensajeError = mensaje
+  }
+
   enviarFormulario(){
+    this.hayError = false
     console.log(this.formulario.controls['fInscripcion'].value)
 
     this.http.post("http://127.0.0.1:8000/validate",this.formulario.value).subscribe(

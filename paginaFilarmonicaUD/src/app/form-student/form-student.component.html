@@ -64,4 +64,7 @@
     </div>
     <button [disabled]="!formulario.valid" class="btn btn-primary" (click)="enviarFormulario()">Aceptar</button>
   </form>
+  <div *ngIf="this.hayError" class="alert alert-danger error" role="alert" >
+    {{this.mensajeError}}
+  </div>
 </body>
