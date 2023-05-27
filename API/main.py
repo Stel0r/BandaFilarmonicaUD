@@ -45,10 +45,16 @@ async def root():
 
 @app.post('/agregarEstudiantes')
 async def root(s:estudiante):
-    result = ConexionBD.agregarEstudiante(str(s.codigo), s.proyecto, s.nombre, s.apellido, s.fInscripcion, s.fNacimiento, s.correoP)
+    ConexionBD.agregarEstudiante(str(s.codigo), s.proyecto, s.nombre, s.apellido, s.fInscripcion, s.fNacimiento, s.correoP)
     return {"message":"hola mi loco"}
 
 @app.post('/enviarCorreo')
 async def root(s:correo):
-    result = CorreoSer.enviarCorreo(s.asunto,s.contenidos,s.remitente)
+    CorreoSer.enviarCorreo(s.asunto,s.contenidos,s.remitente)
     return {"message":"hola mi loco"}
+
+@app.get('/obtenerCalendario/{periodo}')
+async def root(periodo:str):
+    args = periodo.split('-')
+    result = ConexionBD.consultarCalendario(args[0],args[1])
+    return {"data":result}

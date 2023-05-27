@@ -23,6 +23,22 @@
     cursor: pointer;
 }
 
+.evento{
+    border-radius: 50%;
+    width: 10px;
+    aspect-ratio: 1/1;
+    margin-top:37px;
+    display: inline-block;
+}
+
+.dia > .evento{
+    margin-left: 13px;
+}
+
+.dia > .evento ~ .evento{
+    margin-left: 3px;
+}
+
 .dia-select{
     background-color: rgb(216, 216, 255);
 }

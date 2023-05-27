@@ -69,7 +69,7 @@ insert into listaactividadUD values(2023,'AUXGE','Auxiliar General',25.00,8);
 insert into listaactividadUD values(2023,'AUXIN','Auxiliar Instrumentos',45.00,8);
 
 --1.7. Incluir el tipo de Calendario con: 1 Planeación; 2 Convocatoria; 3 Selección; 4 Ensayo; 5 Función
-insert into tipocalendario values('PA','Planeación');
+insert into tipocalendario values('PA','Planeacion');
 insert into tipocalendario values('CN','Convocatoria');
 insert into tipocalendario values('SL','Seleccion');
 insert into tipocalendario values('EN','Ensayo');
