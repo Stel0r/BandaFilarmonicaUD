@@ -12,7 +12,7 @@ import { Evento } from '../modelos/evento'
 export class CalendarioComponent {
 
     coloresEventos:any = [
-        ['Planeacion',"#FF71C9"],
+        ['Planeacion',"#E7F964"],
         ['Convocatoria',"#ACFF5D"],
         ['Seleccion',"#5DCEFF"],
         ['Ensayo',"#FF5050"],
@@ -78,6 +78,12 @@ export class CalendarioComponent {
     cambioMes() {
         if (this.mes != this.date.getMonth()) {
             this.traerDatosMes(this.mes)
+            if(this.diaSeleccionado){
+                this.diaSeleccionado.classList.remove("dia-select")
+                this.diaSeleccionado = null
+                this.hayDiaSeleccionado = false
+                this.numDia = 0
+            }
             this.date = new Date(this.periodo, this.mes)
             this.date.setMonth(this.mes)
             this.date.setFullYear(this.periodo)
@@ -106,10 +112,10 @@ export class CalendarioComponent {
     }
 
     traerDatosMes(mes) {
+        this.eventos.clear()
         let mesNumero:any = this.mes
         this.http.get<estudianteResponse>("http://127.0.0.1:8000/obtenerCalendario/"+this.periodo+"-"+(parseInt(mesNumero)+1)).subscribe({
             next: (res) => {
-                this.eventos.clear()
                 if(res.data.length != 0){
                     this.nombreObra = res.data[0][0]
                     for (let e of res.data){
@@ -136,6 +142,14 @@ export class CalendarioComponent {
                 console.log(error)
             }
         })
+    }
+
+    formatearMinutos(min:number){
+        if (min<10){
+            return "0"+min
+        }else{
+            return min
+        }
     }
 
     reiniciarMapa(){

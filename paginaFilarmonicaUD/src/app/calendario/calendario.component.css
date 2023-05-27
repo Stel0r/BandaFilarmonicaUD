@@ -64,6 +64,57 @@
     font-size: 14px;
 }
 
+.opciones{
+    width: 250px;
+    background-color: rgb(105, 145, 210);
+    border-radius: 5px;
+    border: gray 1px solid;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.evento-desc{
+    background-color: rgb(185, 210, 227);
+    border-radius: 5px;
+    border: rgb(255, 255, 255) 3px solid;
+    overflow: hidden;
+}
+
+.titleop-container{
+    
+    text-align: center;
+    padding: 20px 20px 20px 20px;
+    background-color:  rgb(122, 139, 226);
+}
+
+.titleop-container p{
+    margin: 0px;
+    font-weight: bold;
+}
+
+.titulo-obra{
+    font-weight: bold;
+    font-size: 25px;
+    text-align: center;
+    margin: 10px;
+}
+
+.descop-container{
+    padding: 20px;
+}
+
+.descop-container p{
+    margin: 0px;
+}
+
+.op-title{
+    font-size: 25px;
+}
+.op-subtitle{
+    font-size: 15px;
+    color: rgb(57, 57, 57);
+    line-height: 10px;
+}
 
 .center{
     display: flex;

@@ -1,34 +1,50 @@
-<div class="center">
-    <div>
-        <select [(ngModel)]="this.mes" (change) = "cambioMes()" name="" id="">
-            <option value="0">Enero</option>
-            <option value="1">Febrero</option>
-            <option value="2">Marzo</option>
-            <option value="3">Abril</option>
-            <option value="4">Mayo</option>
-            <option value="5">Junio</option>
-            <option value="6">Julio</option>
-            <option value="7">Agosto</option>
-            <option value="8">Septiembre</option>
-            <option value="9">Octubre</option>
-            <option value="10">Noviembre</option>
-            <option value="11">Diciembre</option>
-        </select>
-    </div>
-    <div class="calendario-container">
-        <div class="header">DOM</div>
-        <div class="header">LUN</div>
-        <div class="header">MAR</div>
-        <div class="header">MIE</div>
-        <div class="header">JUE</div>
-        <div class="header">VIE</div>
-        <div class="header">SAB</div>
-        <div class="dia-null" *ngFor="let a of diaInicial"></div>
-        <div [id] = "'contenedor' + a" (click) = seleccionarDia(a) class="dia" *ngFor="let a of dias">
-            <div [id]=a class="dia-num">{{a}}</div>
-            <div class="evento" *ngFor = "let e of eventos.get(a.toString())" [ngStyle] ="{'background-color':this.coloresEvento.get(e.tipoEvento)}"></div>
+<div class="">
+    <p class="titulo-obra">{{this.nombreObra}}</p>
+    <div class="center">
+        <div>
+            <select [(ngModel)]="this.mes" (change) = "cambioMes()" name="" id="">
+                <option value="0">Enero</option>
+                <option value="1">Febrero</option>
+                <option value="2">Marzo</option>
+                <option value="3">Abril</option>
+                <option value="4">Mayo</option>
+                <option value="5">Junio</option>
+                <option value="6">Julio</option>
+                <option value="7">Agosto</option>
+                <option value="8">Septiembre</option>
+                <option value="9">Octubre</option>
+                <option value="10">Noviembre</option>
+                <option value="11">Diciembre</option>
+            </select>
         </div>
-        <div class="dia-null" *ngFor="let a of diasFinales"></div>
+        <div class="calendario-container">
+            <div class="header">DOM</div>
+            <div class="header">LUN</div>
+            <div class="header">MAR</div>
+            <div class="header">MIE</div>
+            <div class="header">JUE</div>
+            <div class="header">VIE</div>
+            <div class="header">SAB</div>
+            <div class="dia-null" *ngFor="let a of diaInicial"></div>
+            <div [id] = "'contenedor' + a" (click) = seleccionarDia(a) class="dia" *ngFor="let a of dias">
+                <div [id]=a class="dia-num">{{a}}</div>
+                <div class="evento" *ngFor = "let e of eventos.get(a.toString())" [ngStyle] ="{'background-color':this.coloresEvento.get(e.tipoEvento)}"></div>
+            </div>
+            <div class="dia-null" *ngFor="let a of diasFinales"></div>
+        </div>
+        <div class="opciones">
+            <div class="evento-desc" *ngFor="let e of eventos.get(numDia.toString())">
+                <div class="titleop-container">
+                    <p class = "op-title">{{e.tipoEvento}}</p>
+                    <p class = "op-subtitle">{{e.estado}}</p>
+                </div>
+                <div class="descop-container">
+                    <p class="descop-text"><b>Inicio:</b> {{e.fechaI.getDate()}}/{{e.fechaI.getMonth()}}/{{e.fechaI.getFullYear()}}</p>
+                    <p style="padding-bottom: 10px; line-height: 10px;" class="descop-text"><b>Hora:</b> {{e.fechaI.getHours()}}:{{formatearMinutos(e.fechaI.getMinutes())}}</p>
+                    <p class="descop-text"><b>Final:</b> {{e.fechaF.getDate()}}/{{e.fechaF.getMonth()}}/{{e.fechaF.getFullYear()}}</p>
+                    <p style="padding-bottom: 10px; line-height: 10px;" class="descop-text"><b>Hora:</b> {{e.fechaF.getHours()}}:{{formatearMinutos(e.fechaF.getMinutes())}}</p>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="opciones">hola</div>
 </div>
