@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 11g                           */
-/* Created on:     25/05/2023 04:43:39 p. m.                    */
+/* Created on:     27/05/2023 04:20:43 p. m.                    */
 /*==============================================================*/
 
 
@@ -53,10 +53,10 @@ alter table LABORPERSONALOBRA
    drop constraint FK_LABORPER_RELATIONS_PERSONAL;
 
 alter table LISTAACTIVIDADUD
-   drop constraint FK_LISTAACT_RELATIONS_PERIDO;
+   drop constraint FK_LISTAACT_RELATIONS_PERIODO;
 
 alter table LISTAGASTOUD
-   drop constraint FK_LISTAGAS_RELATIONS_PERIDO;
+   drop constraint FK_LISTAGAS_RELATIONS_PERIODO;
 
 alter table OBRA
    drop constraint FK_OBRA_RELATIONS_GENEROOB;
@@ -65,7 +65,7 @@ alter table OBRA
    drop constraint FK_OBRA_RELATIONS_PAIS;
 
 alter table OBRA
-   drop constraint FK_OBRA_RELATIONS_PERIDO;
+   drop constraint FK_OBRA_RELATIONS_PERIODO;
 
 alter table OBRA
    drop constraint FK_OBRA_RELATIONS_COMPOSIT;
@@ -176,7 +176,7 @@ drop index RELATIONSHIP_21_FK;
 
 drop table PARTICIPACIONESTUDIANTE cascade constraints;
 
-drop table PERIDO cascade constraints;
+drop table PERIODO cascade constraints;
 
 drop index RELATIONSHIP_17_FK;
 
@@ -367,19 +367,19 @@ create index RELATIONSHIP_8_FK on ESTUDIANTE (
 /*==============================================================*/
 create table GASTOOBRA 
 (
-   IDPERIDO             NUMBER(4)            not null,
+   IDPERIODO            NUMBER(6)            not null,
    CODGASTO             VARCHAR2(5)          not null,
    CONSEC               NUMBER(5,0)          not null,
    IDOBRA               VARCHAR2(4)          not null,
    FECHAGASTO           DATE                 not null,
-   constraint PK_GASTOOBRA primary key (IDPERIDO, CODGASTO, CONSEC)
+   constraint PK_GASTOOBRA primary key (IDPERIODO, CODGASTO, CONSEC)
 );
 
 /*==============================================================*/
 /* Index: RELATIONSHIP_12_FK                                    */
 /*==============================================================*/
 create index RELATIONSHIP_12_FK on GASTOOBRA (
-   IDPERIDO ASC,
+   IDPERIODO ASC,
    CODGASTO ASC
 );
 
@@ -446,7 +446,7 @@ create table LABORPERSONALOBRA
    ROL                  NUMBER(4,0),
    ICODEMPLEADO         VARCHAR2(4),
    IDPERSONAOBRA        NUMBER(4,0),
-   IDPERIDO             NUMBER(4),
+   IDPERIODO            NUMBER(6),
    CODACTIVIDAD         VARCHAR2(5),
    NOHORAS              NUMBER(2,0)          not null,
    constraint PK_LABORPERSONALOBRA primary key (CONSCELABOR)
@@ -466,7 +466,7 @@ create index RELATIONSHIP_3_FK on LABORPERSONALOBRA (
 /* Index: RELATIONSHIP_11_FK                                    */
 /*==============================================================*/
 create index RELATIONSHIP_11_FK on LABORPERSONALOBRA (
-   IDPERIDO ASC,
+   IDPERIODO ASC,
    CODACTIVIDAD ASC
 );
 
@@ -475,19 +475,19 @@ create index RELATIONSHIP_11_FK on LABORPERSONALOBRA (
 /*==============================================================*/
 create table LISTAACTIVIDADUD 
 (
-   IDPERIDO             NUMBER(4)            not null,
+   IDPERIODO            NUMBER(6)            not null,
    CODACTIVIDAD         VARCHAR2(5)          not null,
    DESCACTIVIDAD        VARCHAR2(40)         not null,
    VALORHORA            NUMBER(4,2)          not null,
    MAXHORAS             NUMBER(3,0)          not null,
-   constraint PK_LISTAACTIVIDADUD primary key (IDPERIDO, CODACTIVIDAD)
+   constraint PK_LISTAACTIVIDADUD primary key (IDPERIODO, CODACTIVIDAD)
 );
 
 /*==============================================================*/
 /* Index: RELATIONSHIP_10_FK                                    */
 /*==============================================================*/
 create index RELATIONSHIP_10_FK on LISTAACTIVIDADUD (
-   IDPERIDO ASC
+   IDPERIODO ASC
 );
 
 /*==============================================================*/
@@ -495,16 +495,16 @@ create index RELATIONSHIP_10_FK on LISTAACTIVIDADUD (
 /*==============================================================*/
 create table LISTAGASTOUD 
 (
-   IDPERIDO             NUMBER(4)            not null,
+   IDPERIODO            NUMBER(6)            not null,
    CODGASTO             VARCHAR2(5)          not null,
-   constraint PK_LISTAGASTOUD primary key (IDPERIDO, CODGASTO)
+   constraint PK_LISTAGASTOUD primary key (IDPERIODO, CODGASTO)
 );
 
 /*==============================================================*/
 /* Index: RELATIONSHIP_9_FK                                     */
 /*==============================================================*/
 create index RELATIONSHIP_9_FK on LISTAGASTOUD (
-   IDPERIDO ASC
+   IDPERIODO ASC
 );
 
 /*==============================================================*/
@@ -515,7 +515,7 @@ create table OBRA
    IDOBRA               VARCHAR2(4)          not null,
    IDGENEROOBRA         VARCHAR2(2)          not null,
    CODPAIS              VARCHAR2(3)          not null,
-   IDPERIDO             NUMBER(4),
+   IDPERIODO            NUMBER(6),
    IDCOMPOSITOR         VARCHAR2(3)          not null,
    FECHAOBRA            DATE                 not null,
    TITULO               VARCHAR2(30)         not null,
@@ -541,7 +541,7 @@ create index RELATIONSHIP_15_FK on OBRA (
 /* Index: RELATIONSHIP_16_FK                                    */
 /*==============================================================*/
 create index RELATIONSHIP_16_FK on OBRA (
-   IDPERIDO ASC
+   IDPERIODO ASC
 );
 
 /*==============================================================*/
@@ -591,12 +591,12 @@ create index RELATIONSHIP_22_FK on PARTICIPACIONESTUDIANTE (
 );
 
 /*==============================================================*/
-/* Table: PERIDO                                                */
+/* Table: PERIODO                                               */
 /*==============================================================*/
-create table PERIDO 
+create table PERIODO 
 (
-   IDPERIDO             NUMBER(4)            not null,
-   constraint PK_PERIDO primary key (IDPERIDO)
+   IDPERIODO            NUMBER(6)            not null,
+   constraint PK_PERIODO primary key (IDPERIODO)
 );
 
 /*==============================================================*/
@@ -752,8 +752,8 @@ alter table ESTUDIANTE
       references UNIDAD (CODUNIDAD);
 
 alter table GASTOOBRA
-   add constraint FK_GASTOOBR_RELATIONS_LISTAGAS foreign key (IDPERIDO, CODGASTO)
-      references LISTAGASTOUD (IDPERIDO, CODGASTO);
+   add constraint FK_GASTOOBR_RELATIONS_LISTAGAS foreign key (IDPERIODO, CODGASTO)
+      references LISTAGASTOUD (IDPERIODO, CODGASTO);
 
 alter table GASTOOBRA
    add constraint FK_GASTOOBR_RELATIONS_OBRA foreign key (IDOBRA)
@@ -768,20 +768,20 @@ alter table INVENTARIOINSTRUMENTO
       references INSTRUMENTO (IDINSTRUMENTO);
 
 alter table LABORPERSONALOBRA
-   add constraint FK_LABORPER_RELATIONS_LISTAACT foreign key (IDPERIDO, CODACTIVIDAD)
-      references LISTAACTIVIDADUD (IDPERIDO, CODACTIVIDAD);
+   add constraint FK_LABORPER_RELATIONS_LISTAACT foreign key (IDPERIODO, CODACTIVIDAD)
+      references LISTAACTIVIDADUD (IDPERIODO, CODACTIVIDAD);
 
 alter table LABORPERSONALOBRA
    add constraint FK_LABORPER_RELATIONS_PERSONAL foreign key (CODUNIDAD, ROL, ICODEMPLEADO, IDPERSONAOBRA)
       references PERSONALOBRA (CODUNIDAD, ROL, ICODEMPLEADO, IDPERSONAOBRA);
 
 alter table LISTAACTIVIDADUD
-   add constraint FK_LISTAACT_RELATIONS_PERIDO foreign key (IDPERIDO)
-      references PERIDO (IDPERIDO);
+   add constraint FK_LISTAACT_RELATIONS_PERIODO foreign key (IDPERIODO)
+      references PERIODO (IDPERIODO);
 
 alter table LISTAGASTOUD
-   add constraint FK_LISTAGAS_RELATIONS_PERIDO foreign key (IDPERIDO)
-      references PERIDO (IDPERIDO);
+   add constraint FK_LISTAGAS_RELATIONS_PERIODO foreign key (IDPERIODO)
+      references PERIODO (IDPERIODO);
 
 alter table OBRA
    add constraint FK_OBRA_RELATIONS_GENEROOB foreign key (IDGENEROOBRA)
@@ -792,8 +792,8 @@ alter table OBRA
       references PAIS (CODPAIS);
 
 alter table OBRA
-   add constraint FK_OBRA_RELATIONS_PERIDO foreign key (IDPERIDO)
-      references PERIDO (IDPERIDO);
+   add constraint FK_OBRA_RELATIONS_PERIODO foreign key (IDPERIODO)
+      references PERIODO (IDPERIODO);
 
 alter table OBRA
    add constraint FK_OBRA_RELATIONS_COMPOSIT foreign key (IDCOMPOSITOR)
