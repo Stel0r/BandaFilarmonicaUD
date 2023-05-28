@@ -1,0 +1,29 @@
+<blockquote class="blockquote text-center">
+  <p class="mb-3 h2">Listado de estudiantes Orquesta Filarmonica.</p>
+  <footer class="blockquote-footer">
+    Univerdidad Distrital
+    <cite title="Source Title">Francisco Jose de Caldas</cite>
+  </footer>
+</blockquote>
+<table class="table table-dark shadow-lg p-3 mb-5 bg-white rounded">
+  <thead>
+    <tr>
+      <th scope="col">Codigo</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellido</th>
+      <th scope="col">Facultad</th>
+      <th scope="col">Proyecto Curricular</th>
+      <th scope="col">Instrumento</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let estudiante of listaEstudianteCon">
+      <td>{{ estudiante[0] }}</td>
+      <td>{{ estudiante[1] }}</td>
+      <td>{{ estudiante[2] }}</td>
+      <td>{{ estudiante[3] }}</td>
+      <td>{{ estudiante[4] }}</td>
+      <td>{{ estudiante[5] }}</td>
+    </tr>
+  </tbody>
+</table>

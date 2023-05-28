@@ -58,3 +58,8 @@ async def root(periodo:str):
     args = periodo.split('-')
     result = ConexionBD.consultarCalendario(args[0],args[1])
     return {"data":result}
+
+@app.get('/listaEstudianteCon')
+async def root():
+    result = ConexionBD.consultarEstudianteConvocatoria()
+    return {"data":result}

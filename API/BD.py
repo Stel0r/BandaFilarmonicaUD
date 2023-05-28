@@ -46,5 +46,17 @@ class ConexionBD:
         print(result)
         return result
 
+    def consultarEstudianteConvocatoria():
+        oracledb.init_oracle_client()
+        connection = oracledb.connect(user= ConexionBD.user, password=ConexionBD.password,host="localhost", port=1521, service_name="xe")
+        cursor = connection.cursor()
+        cursor.execute("select e.codEstudiante, e.nombre, e.apellido, f.nomUnidad, c.nomUnidad, i.nomInstrumento, max(con.calificacion) " 
+        +"from estudiante e, unidad f, unidad c, convocatoriaEstudiante con, instrumento i " 
+        +"where c.codunidad = e.codunidad and f.codunidad = c.uni_codunidad and  i.idInstrumento = con.idInstrumento and e.codEstudiante = con.codEstudiante and " 
+        +"(con.idInstrumento,con.calificacion) in (select idInstrumento, max(calificacion) from convocatoriaEstudiante group by idInstrumento) "
+        +"group by i.idinstrumento, e.codEstudiante, e.nombre, e.apellido, f.nomUnidad, c.nomUnidad, i.nomInstrumento")
+        result = cursor.fetchall()
+        connection.close()
+        return result
 
 

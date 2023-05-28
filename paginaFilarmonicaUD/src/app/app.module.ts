@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminComponent } from './admin/admin.component';
 import { CalendarioComponent } from './calendario/calendario.component';
 import { LiquidacionEstudianteComponent } from './liquidacion-estudiante/liquidacion-estudiante.component';
+import { SeleccionConComponent } from './seleccion-con/seleccion-con.component';
 
 @NgModule({
     declarations: [
@@ -23,7 +24,8 @@ import { LiquidacionEstudianteComponent } from './liquidacion-estudiante/liquida
         FormStudentComponent,
         AdminComponent,
         CalendarioComponent,
-        LiquidacionEstudianteComponent
+        LiquidacionEstudianteComponent,
+        SeleccionConComponent
     ],
     providers: [],
     bootstrap: [AppComponent],
