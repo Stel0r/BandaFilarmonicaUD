@@ -63,3 +63,7 @@ async def root(periodo:str):
 async def root():
     result = ConexionBD.consultarEstudianteConvocatoria()
     return {"data":result}
+@app.get('/listaLiquidacion')
+async def root():
+    result = ConexionBD.consultarLiquidacion()
+    return {"data":result}

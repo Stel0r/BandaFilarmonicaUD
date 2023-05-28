@@ -8,3 +8,7 @@ export interface estudianteConResponse{
 export interface unidadesResponse{
     data:Array<any>
 }
+
+export interface liquidacionResponse{
+    data:Array<any>
+}
