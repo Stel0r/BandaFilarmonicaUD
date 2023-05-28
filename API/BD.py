@@ -48,5 +48,33 @@ class ConexionBD:
         print(result)
         return result
 
+    def consultarEstudianteConvocatoria():
+        oracledb.init_oracle_client()
+        connection = oracledb.connect(user= ConexionBD.user, password=ConexionBD.password,host="localhost", port=1521, service_name="xe")
+        cursor = connection.cursor()
+        cursor.execute("select e.codEstudiante, e.nombre, e.apellido, f.nomUnidad, c.nomUnidad, i.nomInstrumento, max(con.calificacion) " 
+        +"from estudiante e, unidad f, unidad c, convocatoriaEstudiante con, instrumento i " 
+        +"where c.codunidad = e.codunidad and f.codunidad = c.uni_codunidad and  i.idInstrumento = con.idInstrumento and e.codEstudiante = con.codEstudiante and " 
+        +"(con.idInstrumento,con.calificacion) in (select idInstrumento, max(calificacion) from convocatoriaEstudiante group by idInstrumento) "
+        +"group by i.idinstrumento, e.codEstudiante, e.nombre, e.apellido, f.nomUnidad, c.nomUnidad, i.nomInstrumento")
+        result = cursor.fetchall()
+        connection.close()
+        return result
+    
+    def consultarLiquidacion():
+        oracledb.init_oracle_client()
+        connection = oracledb.connect(user= ConexionBD.user, password=ConexionBD.password,host="localhost", port=1521, service_name="xe")
+        cursor = connection.cursor()
+        cursor.execute("select e.nombre ||' '|| e.apellido Estudiante, e.codestudiante codigo, un.nomunidad facultad, e.correo correo, sum(trunc(mod((c.fechafin - c.fechainicio)*24,24))) Nohoras" +
+                        " from estudiante e, unidad u, unidad un, calendario c, participacionestudiante p " + 
+                        "where e.codestudiante = p.codestudiante and " +
+                        "e.codunidad = u.codunidad and " +
+                        "u.uni_codunidad = un.codunidad and " +
+                        "c.conseccalendario = p.conseccalendario " +
+                        "group by e.nombre ||' '|| e.apellido , e.codestudiante , un.nomunidad, e.correo")
+        result = cursor.fetchall()
+        connection.close()
+        return result
+
 
 
