@@ -17,7 +17,7 @@ const routes: Routes = [
   {
     path:'Admin', component:AdminComponent,
     children:[
-      {path:'Calendario', component:CalendarioComponent},
+      {path:'Calendario/:periodo', component:CalendarioComponent},
       {path:'Liquidacion', component:LiquidacionEstudianteComponent},
       {path:'Seleccion', component:SeleccionConComponent},
       {path:'Asistencia', component:AsistenciaComponent}

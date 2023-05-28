@@ -2,9 +2,17 @@
   <div class="sidebar">
     <ul>
       <li>
-        <a class="btn btn-primary boton-menu" [routerLink]="['Calendario']"
-          >Calendario</a
-        >
+        <select [(ngModel)] = "this.periodo" (change)="this.cambioPeriodo()" name="" id="" style="width: 100%;">
+          <option value="202301">202301</option>
+          <option value="202302">202302</option>
+          <option value="202201">202201</option>
+          <option value="202202">202202</option>
+        </select>
+      </li>
+      <li>
+        <button class="btn btn-primary boton-menu" (click)="this.abrirCalendario()">
+          Calendario
+        </button>
       </li>
       <li>
         <button class="btn btn-primary boton-menu" [routerLink]="['Seleccion']">
