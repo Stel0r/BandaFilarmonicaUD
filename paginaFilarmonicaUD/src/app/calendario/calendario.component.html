@@ -1,21 +1,31 @@
 <div class="">
-    <p class="titulo-obra">{{this.nombreObra}}</p>
     <div class="center">
         <div>
-            <select [(ngModel)]="this.mes" (change) = "cambioMes()" name="" id="">
-                <option value="0">Enero</option>
-                <option value="1">Febrero</option>
-                <option value="2">Marzo</option>
-                <option value="3">Abril</option>
-                <option value="4">Mayo</option>
-                <option value="5">Junio</option>
-                <option value="6">Julio</option>
-                <option value="7">Agosto</option>
-                <option value="8">Septiembre</option>
-                <option value="9">Octubre</option>
-                <option value="10">Noviembre</option>
-                <option value="11">Diciembre</option>
-            </select>
+            <div class="op-calen">
+                <select [(ngModel)]="this.periodo"name="" (change) = "cambioMes()" id="">
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                </select>
+                <select [(ngModel)]="this.mes" (change) = "cambioMes()" name="" id="">
+                    <option value="0">Enero</option>
+                    <option value="1">Febrero</option>
+                    <option value="2">Marzo</option>
+                    <option value="3">Abril</option>
+                    <option value="4">Mayo</option>
+                    <option value="5">Junio</option>
+                    <option value="6">Julio</option>
+                    <option value="7">Agosto</option>
+                    <option value="8">Septiembre</option>
+                    <option value="9">Octubre</option>
+                    <option value="10">Noviembre</option>
+                    <option value="11">Diciembre</option>
+                </select>
+            </div>
         </div>
         <div class="calendario-container">
             <div class="header">DOM</div>
@@ -36,12 +46,13 @@
             <div class="evento-desc" *ngFor="let e of eventos.get(numDia.toString())">
                 <div class="titleop-container">
                     <p class = "op-title">{{e.tipoEvento}}</p>
-                    <p class = "op-subtitle">{{e.estado}}</p>
+                    <p class = "op-subtitle">{{e.nombreObra}}</p>
+                    <p class = "op-status">{{e.estado}}</p>
                 </div>
                 <div class="descop-container">
-                    <p class="descop-text"><b>Inicio:</b> {{e.fechaI.getDate()}}/{{e.fechaI.getMonth()}}/{{e.fechaI.getFullYear()}}</p>
+                    <p class="descop-text"><b>Inicio:</b> {{e.fechaI.getDate()}}/{{e.fechaI.getMonth()+1}}/{{e.fechaI.getFullYear()}}</p>
                     <p style="padding-bottom: 10px; line-height: 10px;" class="descop-text"><b>Hora:</b> {{e.fechaI.getHours()}}:{{formatearMinutos(e.fechaI.getMinutes())}}</p>
-                    <p class="descop-text"><b>Final:</b> {{e.fechaF.getDate()}}/{{e.fechaF.getMonth()}}/{{e.fechaF.getFullYear()}}</p>
+                    <p class="descop-text"><b>Final:</b> {{e.fechaF.getDate()}}/{{e.fechaF.getMonth()+1}}/{{e.fechaF.getFullYear()}}</p>
                     <p style="padding-bottom: 10px; line-height: 10px;" class="descop-text"><b>Hora:</b> {{e.fechaF.getHours()}}:{{formatearMinutos(e.fechaF.getMinutes())}}</p>
                 </div>
             </div>

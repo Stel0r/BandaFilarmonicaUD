@@ -94,7 +94,7 @@ insert into calendario values('PSSM','FN',0044,'Activo',to_date('06/06/2023 8:00
 -- Periodo 202302
 
 insert into calendario values('MSIM','PA',0045,'Activo',to_date('24/06/2023 06:00 AM', 'dd/mm/yyyy HH:MI AM'),to_date('30/06/2023 06:00 PM', 'dd/mm/yyyy HH:MI AM'));
-insert into calendario values('MSIM','CN',0046,'Activo',to_date('02/07/2023 06:00 AM', 'dd/mm/yyyy HH:MI AM'),to_date('10/07/2023 06:00 PM', 'dd/mm/yyyy HH:MI AM'));
+insert into calendario values('MSIM','CN',0046,'Activo',to_date('02/07/2023 06:00 AM', 'dd/mm/yyyy HH:MI AM'),to_date('09/07/2023 06:00 PM', 'dd/mm/yyyy HH:MI AM'));
 insert into calendario values('MSIM','SL',0047,'Activo',to_date('10/07/2023 12:00 PM', 'dd/mm/yyyy HH:MI AM'),to_date('11/07/2023 04:00 PM', 'dd/mm/yyyy HH:MI AM'));
 
 --ensayos

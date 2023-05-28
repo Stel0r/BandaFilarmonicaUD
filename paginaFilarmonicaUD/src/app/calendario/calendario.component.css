@@ -109,11 +109,16 @@
 
 .op-title{
     font-size: 25px;
+    line-height: 30px;
 }
 .op-subtitle{
     font-size: 15px;
-    color: rgb(57, 57, 57);
-    line-height: 10px;
+    line-height: 13px;
+}
+
+.op-status{
+    font-size: 13px;
+    color: rgb(42, 42, 42);
 }
 
 .center{

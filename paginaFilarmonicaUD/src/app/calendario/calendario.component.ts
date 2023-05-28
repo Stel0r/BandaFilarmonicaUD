@@ -27,10 +27,10 @@ export class CalendarioComponent {
     coloresEvento:Map<string,string> = new Map(this.coloresEventos)
     diaInicial: Array<number>
     diasFinales: Array<number>
+    diaFinal:number
     diaSeleccionado: HTMLDivElement
     hayDiaSeleccionado: boolean = false
     numDia: number = 0
-    nombreObra:string;
     eventos: Map<string,Array<Evento>> = new Map()
 
     constructor(private http: HttpClient) { }
@@ -43,13 +43,14 @@ export class CalendarioComponent {
         this.date.setFullYear(this.periodo)
         var firstDay = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
         var lastDay = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0);
+        this.diaFinal = lastDay.getDate()
         this.dias = Array(lastDay.getDate()).fill(0).map((x, i) => i + 1)
         this.diaInicial = Array(firstDay.getDay()).fill(0).map((x, i) => i + 1)
         this.diasFinales = Array(6 - lastDay.getDay()).fill(0).map((x, i) => i + 1)
     }
 
     ngAfterViewInit() {
-        this.traerDatosMes(this.mes)
+        this.traerDatosMes()
         let diaHoy = document.getElementById(new Date().getDate().toString())!
         diaHoy.classList.add("dia-num-hoy")
     }
@@ -76,8 +77,8 @@ export class CalendarioComponent {
     }
 
     cambioMes() {
-        if (this.mes != this.date.getMonth()) {
-            this.traerDatosMes(this.mes)
+        if (this.mes != this.date.getMonth() || this.periodo != this.date.getFullYear()) {
+            this.traerDatosMes()
             if(this.diaSeleccionado){
                 this.diaSeleccionado.classList.remove("dia-select")
                 this.diaSeleccionado = null
@@ -89,6 +90,7 @@ export class CalendarioComponent {
             this.date.setFullYear(this.periodo)
             var firstDay = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
             var lastDay = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0);
+            this.diaFinal = lastDay.getDate()
             this.dias = Array(lastDay.getDate()).fill(0).map((x, i) => i + 1)
             this.diaInicial = Array(firstDay.getDay()).fill(0).map((x, i) => i + 1)
             this.diasFinales = Array(6 - lastDay.getDay()).fill(0).map((x, i) => i + 1)
@@ -108,23 +110,34 @@ export class CalendarioComponent {
         let fechaSeparada = fechaS.split("T")
         let diaLista = fechaSeparada[0].split("-")
         let horaLista = fechaSeparada[1].split(":")
-        return new Date(parseInt(diaLista[0]),parseInt(diaLista[1]),parseInt(diaLista[2]),parseInt(horaLista[0]),parseInt(horaLista[1]))
+        console.log(diaLista)
+        let fecha = new Date(parseInt(diaLista[0]),parseInt(diaLista[1])-1,parseInt(diaLista[2]),parseInt(horaLista[0]),parseInt(horaLista[1]))
+        console.log(fecha)
+        return fecha
     }
 
-    traerDatosMes(mes) {
+    traerDatosMes() {
         this.eventos.clear()
         let mesNumero:any = this.mes
         this.http.get<estudianteResponse>("http://127.0.0.1:8000/obtenerCalendario/"+this.periodo+"-"+(parseInt(mesNumero)+1)).subscribe({
             next: (res) => {
                 if(res.data.length != 0){
-                    this.nombreObra = res.data[0][0]
                     for (let e of res.data){
+                        console.log(e)
                         let evento = new Evento()
+                        evento.nombreObra = e[0]
                         evento.tipoEvento = e[1]
                         evento.estado = e[2]
                         evento.fechaI = this.crearFecha(e[3].toString())
                         evento.fechaF = this.crearFecha(e[4].toString())
-                        let dia = evento.fechaI.getDate()
+                        console.log(evento)
+                        let dia = evento.fechaI.getDate();
+                        let fechafinal:number
+                        if(this.mes != evento.fechaF.getMonth()){
+                            fechafinal = this.diaFinal
+                        }else{
+                            fechafinal = evento.fechaF.getDate()
+                        }
                         //se agrega a la lista de eventos del mes
                         for(let i = evento.fechaF.getDate() - dia;i>=0;i--){
                             if(this.eventos.has((dia+i).toString())){
