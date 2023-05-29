@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { estudianteResponse } from '../modelos/responses';
 import { HttpClient } from '@angular/common/http';
 import { Evento } from '../modelos/evento'
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-calendario',
@@ -19,7 +20,8 @@ export class CalendarioComponent {
         ['Funcion',"#7D50FF"],
     ]
 
-    periodo: number = new Date().getFullYear()
+    periodo:string
+    año: number
     mes = new Date().getMonth()
     date: Date
     //estos arrays es para que ngFor pueda recorrerlos
@@ -33,14 +35,20 @@ export class CalendarioComponent {
     numDia: number = 0
     eventos: Map<string,Array<Evento>> = new Map()
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient,private ruta :ActivatedRoute) { }
 
 
     ngOnInit() {
+        this.ruta.params.subscribe((params) => {
+            if(params['periodo']){
+                this.periodo = params['periodo']
+                this.año = parseInt(this.periodo.substring(0,4))
+            }
+        })
         console.log(this.mes)
-        this.date = new Date(this.periodo, this.mes)
+        this.date = new Date(this.año, this.mes)
         this.date.setMonth(this.mes)
-        this.date.setFullYear(this.periodo)
+        this.date.setFullYear(this.año)
         var firstDay = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
         var lastDay = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0);
         this.diaFinal = lastDay.getDate()
@@ -77,7 +85,7 @@ export class CalendarioComponent {
     }
 
     cambioMes() {
-        if (this.mes != this.date.getMonth() || this.periodo != this.date.getFullYear()) {
+        if (this.mes != this.date.getMonth() || this.año != this.date.getFullYear()) {
             this.traerDatosMes()
             if(this.diaSeleccionado){
                 this.diaSeleccionado.classList.remove("dia-select")
@@ -85,9 +93,9 @@ export class CalendarioComponent {
                 this.hayDiaSeleccionado = false
                 this.numDia = 0
             }
-            this.date = new Date(this.periodo, this.mes)
+            this.date = new Date(this.año, this.mes)
             this.date.setMonth(this.mes)
-            this.date.setFullYear(this.periodo)
+            this.date.setFullYear(this.año)
             var firstDay = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
             var lastDay = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0);
             this.diaFinal = lastDay.getDate()
