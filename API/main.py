@@ -19,6 +19,10 @@ class estudiante(BaseModel):
     nombre:str
     proyecto:str
 
+class peticionInactivacionPeriodo(BaseModel):
+    periodo:str
+    actividad:str
+
 app = FastAPI()
 
 origins = [
@@ -63,7 +67,13 @@ async def root(periodo:str):
 async def root():
     result = ConexionBD.consultarEstudianteConvocatoria()
     return {"data":result}
+
 @app.get('/listaLiquidacion')
 async def root():
     result = ConexionBD.consultarLiquidacion()
     return {"data":result}
+
+@app.post('/inactivarAct')
+async def root(peticion:peticionInactivacionPeriodo):
+    print(peticion)
+    result = ConexionBD.inactivarEventoPeriodo(peticion.actividad,peticion.periodo)

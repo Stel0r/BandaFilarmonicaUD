@@ -3,6 +3,7 @@ import { estudianteResponse } from '../modelos/responses';
 import { HttpClient } from '@angular/common/http';
 import { Evento } from '../modelos/evento'
 import { ActivatedRoute } from '@angular/router';
+import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 
 @Component({
     selector: 'app-calendario',
@@ -138,6 +139,7 @@ export class CalendarioComponent {
                         evento.estado = e[2]
                         evento.fechaI = this.crearFecha(e[3].toString())
                         evento.fechaF = this.crearFecha(e[4].toString())
+                        evento.consecCalen = e[5]
                         console.log(evento)
                         let dia = evento.fechaI.getDate();
                         let fechafinal:number
@@ -154,7 +156,6 @@ export class CalendarioComponent {
                                 this.eventos.set((dia+i).toString(),[evento])
                             }
                         }
-                        
                     }
                 }
                 
@@ -178,4 +179,14 @@ export class CalendarioComponent {
             this.eventos.set(i,[])
         }
     }
+
+
+    inactivarPlaneacion(periodo:string){
+        let body = {
+            periodo:periodo,
+            actividad:"PA"
+        }
+        this.http.post("http://127.0.0.1:8000/inactivarAct",body).subscribe()
+    }
+
 }
