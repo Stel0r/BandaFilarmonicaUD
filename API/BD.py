@@ -37,12 +37,20 @@ class ConexionBD:
         oracledb.init_oracle_client()
         connection = oracledb.connect(user= ConexionBD.user, password=ConexionBD.password,host="localhost", port=1521, service_name="xe")
         cursor = connection.cursor()
-        query = "select o.titulo, t.desctipocalendario, c.idestado, c.fechainicio, c.fechafin from obra o,tipocalendario t, calendario c where t.idtipocalen = c.idtipocalen and o.idobra = c.idobra and o.idperiodo = "+periodo+" and extract(MONTH from c.fechainicio) = "+mes+" ORDER BY c.fechainicio"
-        print(query)
+        query = "select o.titulo, t.desctipocalendario, c.idestado, c.fechainicio, c.fechafin, o.idobra, c.conseccalendario from obra o,tipocalendario t, calendario c where t.idtipocalen = c.idtipocalen and o.idobra = c.idobra and o.idperiodo = "+periodo+" and extract(MONTH from c.fechainicio) = "+mes+" ORDER BY c.fechainicio"
         cursor.execute(query)
         result = cursor.fetchall()
-        print(result)
+        connection.close()
         return result
+
+    def inactivarEventoPeriodo(tipoCalen:str,periodo:str):
+        oracledb.init_oracle_client()
+        connection = oracledb.connect(user= ConexionBD.user, password=ConexionBD.password,host="localhost", port=1521, service_name="xe")
+        cursor = connection.cursor()
+        query = "update calendario c set c.idestado = 'Inactivo' where idObra in (select o.idObra from obra o where o.idperiodo = "+periodo+") and c.idtipocalen = '"+tipoCalen+"'"
+        cursor.execute(query)
+        connection.commit()
+        connection.close()
 
     def consultarEstudianteConvocatoria():
         oracledb.init_oracle_client()
@@ -72,5 +80,15 @@ class ConexionBD:
         connection.close()
         return result
 
+
+    def obtenerSeleccionados(periodo:str):
+        oracledb.init_oracle_client()
+        connection = oracledb.connect(user= ConexionBD.user, password=ConexionBD.password,host="localhost", port=1521, service_name="xe")
+        cursor = connection.cursor()
+        query = "select o.titulo, t.desctipocalendario, c.idestado, c.fechainicio, c.fechafin, o.idobra, c.conseccalendario from obra o,tipocalendario t, calendario c where t.idtipocalen = c.idtipocalen and o.idobra = c.idobra and o.idperiodo = "+periodo+" and extract(MONTH from c.fechainicio) = "+mes+" ORDER BY c.fechainicio"
+        cursor.execute(query)
+        result = cursor.fetchall()
+        connection.close()
+        return result
 
 

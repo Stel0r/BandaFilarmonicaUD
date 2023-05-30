@@ -4,4 +4,5 @@ export class Evento{
     estado:string
     fechaI:Date
     fechaF:Date
+    consecCalen:number
 }

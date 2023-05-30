@@ -1,4 +1,4 @@
-<div class="">
+<div class="window">
     <div class="center">
         <div>
             <div class="op-calen">
@@ -16,6 +16,8 @@
                     <option value="10">Noviembre</option>
                     <option value="11">Diciembre</option>
                 </select>
+                <button class="btn btn-primary">Crear Calendario</button>
+                <button class="btn btn-primary" (click)="inactivarPlaneacion(this.periodo)">Terminar Calendario</button>
             </div>
         </div>
         <div class="calendario-container">
