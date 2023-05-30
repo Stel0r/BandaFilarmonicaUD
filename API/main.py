@@ -77,3 +77,8 @@ async def root():
 async def root(peticion:peticionInactivacionPeriodo):
     print(peticion)
     result = ConexionBD.inactivarEventoPeriodo(peticion.actividad,peticion.periodo)
+    return {"message": "completado"}
+
+@app.get('/seleccionados/{periodo}')
+async def root(periodo:str):
+    result = ConexionBD.obtenerSeleccionados(periodo)

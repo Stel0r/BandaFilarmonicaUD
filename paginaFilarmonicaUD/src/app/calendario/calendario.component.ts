@@ -186,7 +186,11 @@ export class CalendarioComponent {
             periodo:periodo,
             actividad:"PA"
         }
-        this.http.post("http://127.0.0.1:8000/inactivarAct",body).subscribe()
+        this.http.post("http://127.0.0.1:8000/inactivarAct",body).subscribe(
+            (next) => {
+                this.traerDatosMes();
+            }
+        )
     }
 
 }
