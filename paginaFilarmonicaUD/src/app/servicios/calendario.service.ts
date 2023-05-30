@@ -8,7 +8,7 @@ import { estudianteResponse } from '../modelos/responses';
 })
 export class CalendarioService {
   calendario: Array<Evento> = []
-  eventoAhora: Evento
+  eventosAhora: Array<Evento> = []
   constructor(private http: HttpClient) { }
 
   actualizarCalendario(periodo: string) {
@@ -16,7 +16,7 @@ export class CalendarioService {
       {
         next: (res) => {
           this.calendario = []
-          delete this.eventoAhora
+          this.eventosAhora = []
           let ahora = new Date()
           for (let e of res.data) {
             let evento = new Evento()
@@ -31,8 +31,7 @@ export class CalendarioService {
             if (evento.fechaI < ahora && evento.fechaF > ahora) {
               console.log(e)
               console.log(evento)
-              this.eventoAhora = evento
-              console.log(this.eventoAhora.tipoEvento)
+              this.eventosAhora.push(evento)
             }
             this.calendario.push(evento)
           }
@@ -40,9 +39,19 @@ export class CalendarioService {
       })
   }
 
+  obtenerEnsayoHoy(){
+    for(let e of this.eventosAhora){
+      if (e.tipoEvento === "Ensayo"){
+        return e
+      }
+    }
+    return undefined
+  }
+
   estadoPlaneacion() {
     for (let e of this.calendario) {
-      if (e.idTipoCalen = "PA") {
+      if (e.idTipoCalen === "PA") {
+        console.log(e)
         return e.estado
       }
     }

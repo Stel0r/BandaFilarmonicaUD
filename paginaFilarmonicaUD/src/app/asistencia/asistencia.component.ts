@@ -34,7 +34,7 @@ export class AsistenciaComponent {
         }
       }
     )
-    this.eventoHoy = this.calenService.eventoAhora
+    this.eventoHoy = this.calenService.obtenerEnsayoHoy()
     if(!this.eventoHoy){
       this.router.navigate(['Admin'])
     }

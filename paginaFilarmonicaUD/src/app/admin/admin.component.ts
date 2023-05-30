@@ -42,18 +42,16 @@ export class AdminComponent {
   }
 
   habilitarSeleccion(){
-    return (this.calenService.estadoPlaneacion() === "Activo")
+    return (this.calenService.estadoPlaneacion() === "Activo" || this.calenService.estadoPlaneacion() === "error" )
   }
 
   habilitarAsistencia(){
-    if(this.calenService.eventoAhora === undefined){
+    let ensayoHoy = this.calenService.obtenerEnsayoHoy()
+    if(ensayoHoy === undefined){
       return true
-    }else{
-      if(this.calenService.eventoAhora.tipoEvento === "Ensayo"){
-        return false
-      }else return true
-    }
+    }else return false
   }
+
 
 
 }
