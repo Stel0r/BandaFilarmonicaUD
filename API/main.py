@@ -19,9 +19,30 @@ class estudiante(BaseModel):
     nombre:str
     proyecto:str
 
+class selecccion(BaseModel):
+    idobra:str
+    conseccalendario:int
+    codestudiante:str
+
 class peticionInactivacionPeriodo(BaseModel):
     periodo:str
     actividad:str
+
+def reasignarConvocatorio():
+    resultado = []
+    listEstudiantes = ConexionBD.consultarEstudianteConvocatoria()
+    listInstrumentos = ConexionBD.obtenerInstrumentos()
+
+    for estudiante in listEstudiantes:
+        for instrumento in listInstrumentos:
+            if estudiante[2] == instrumento[0]:
+                resultado.append(instrumento + estudiante)
+                listInstrumentos.remove(instrumento)
+
+                if len(listInstrumentos) == 0:
+                    break
+
+    return resultado
 
 app = FastAPI()
 
@@ -65,7 +86,7 @@ async def root(periodo:str):
 
 @app.get('/listaEstudianteCon')
 async def root():
-    result = ConexionBD.consultarEstudianteConvocatoria()
+    result = reasignarConvocatorio()
     return {"data":result}
 
 @app.get('/listaLiquidacion/{periodo}')
@@ -87,3 +108,8 @@ async def root(periodo:str):
 async def root():
     result = ConexionBD.periodoInactivo()
     return {"data":result}
+
+@app.post('/registrarSeleccion')
+async def root(s:selecccion):
+    ConexionBD.agregarParticipacion(str(ConexionBD.maxIdParticipacion()[0][0]),s.idobra,str(s.conseccalendario),s.codestudiante)
+    return {"message":"hola mi loco"}

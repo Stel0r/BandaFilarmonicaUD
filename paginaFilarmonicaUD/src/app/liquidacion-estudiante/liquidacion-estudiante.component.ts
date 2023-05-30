@@ -99,5 +99,6 @@ export class LiquidacionEstudianteComponent {
         })
     }
     Notiflix.Loading.remove()
+    Notiflix.Notify.success("Envio exitoso")
   }
 }
