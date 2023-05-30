@@ -20,6 +20,7 @@ export class SeleccionConComponent {
     this.http.get<estudianteConResponse>("http://127.0.0.1:8000/listaEstudianteCon").subscribe({
       next:(res)=>{
         this.listaEstudianteCon = res.data
+        this.registrar()
         this.inactivar()
       },
       error: (error) => {
@@ -28,6 +29,11 @@ export class SeleccionConComponent {
       }
     })
 
+    Notiflix.Loading.remove()
+    Notiflix.Notify.success("Proceso exitoso")
+  }
+
+  registrar(){
     for(let estudiante of this.listaEstudianteCon){
       let data = {
         idobra:estudiante[5],
@@ -44,9 +50,6 @@ export class SeleccionConComponent {
         }
       })
     }
-
-    Notiflix.Loading.remove()
-    Notiflix.Notify.success("Proceso exitoso")
   }
 
   inactivar() {
