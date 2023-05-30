@@ -14,13 +14,29 @@ import { liquidacionResponse } from '../modelos/responses';
 })
 export class LiquidacionEstudianteComponent {
   listaLiquidacion : Array<any>
+  periodo : string
 
   pdfLista : Array<any> = [[ 'Estudiante', 'Codigo', 'Facultad', '# de Horas' ]]
 
   constructor(private http:HttpClient){}
 
   ngOnInit(){
-    this.http.get<liquidacionResponse>("http://127.0.0.1:8000/listaLiquidacion").subscribe({
+    this.http.get<liquidacionResponse>("http://127.0.0.1:8000/periodoInactivo").subscribe({
+      next:(res)=>{
+        for(let e of res.data){
+          this.periodo = "" + e[0]
+        }
+        this.cargarLiquidacion(this.periodo)
+        console.log(this.periodo)
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
+  }
+
+  cargarLiquidacion(periodo:string){
+    this.http.get<liquidacionResponse>("http://127.0.0.1:8000/listaLiquidacion/" + periodo).subscribe({
       next:(res)=>{
         this.listaLiquidacion = res.data
 
@@ -45,7 +61,7 @@ export class LiquidacionEstudianteComponent {
         keywords: 'keywords for document',
         },
       content: [
-        {text: 'Liquidación Viáticos Periodo XXXX', style: 'header', fontSize: 25},
+        {text: 'Liquidación Viáticos Periodo ' + this.periodo, style: 'header', fontSize: 25},
         {text: '                                     '},
         {
           layout: 'lightHorizontalLines',
