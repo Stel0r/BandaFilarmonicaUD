@@ -136,3 +136,12 @@ class ConexionBD:
         connection.commit()
         connection.close()
         return result
+    
+    def inactivarConvocatoria(conseccalendario:str):
+        oracledb.init_oracle_client()
+        connection = oracledb.connect(user= ConexionBD.user, password=ConexionBD.password,host="localhost", port=1521, service_name="xe")
+        cursor = connection.cursor()
+        query = "update calendario set idestado = 'Inactivo' where conseccalendario like " + conseccalendario
+        cursor.execute(query)
+        connection.commit()
+        connection.close()

@@ -28,6 +28,9 @@ class peticionInactivacionPeriodo(BaseModel):
     periodo:str
     actividad:str
 
+class InactivarConvocatoria(BaseModel):
+    conseccalendario:int
+
 def reasignarConvocatorio():
     resultado = []
     listEstudiantes = ConexionBD.consultarEstudianteConvocatoria()
@@ -113,3 +116,9 @@ async def root():
 async def root(s:selecccion):
     ConexionBD.agregarParticipacion(str(ConexionBD.maxIdParticipacion()[0][0]),s.idobra,str(s.conseccalendario),s.codestudiante)
     return {"message":"hola mi loco"}
+
+@app.post('/inactivarCalendario')
+async def root(peticion:InactivarConvocatoria):
+    print(peticion)
+    result = ConexionBD.inactivarConvocatoria(str(peticion.conseccalendario))
+    return {"message": "completado"}

@@ -15,17 +15,19 @@ export class SeleccionConComponent {
   constructor(private http:HttpClient){}
 
   seleccionar(){
+    Notiflix.Loading.standard('Selecccionando y Registrando')
+
     this.http.get<estudianteConResponse>("http://127.0.0.1:8000/listaEstudianteCon").subscribe({
       next:(res)=>{
         this.listaEstudianteCon = res.data
-        console.log(this.listaEstudianteCon)
+        this.inactivar()
       },
       error: (error) => {
-        console.log(error)
+        Notiflix.Loading.remove()
+        Notiflix.Notify.warning('No se pudo cargar los seleccionados correctamente')
       }
     })
 
-    Notiflix.Loading.standard('Registrando Participacion')
     for(let estudiante of this.listaEstudianteCon){
       let data = {
         idobra:estudiante[5],
@@ -42,7 +44,24 @@ export class SeleccionConComponent {
         }
       })
     }
+
     Notiflix.Loading.remove()
-    Notiflix.Notify.success("Registro exitoso")
+    Notiflix.Notify.success("Proceso exitoso")
+  }
+
+  inactivar() {
+    let inactivar = {
+      conseccalendario: this.listaEstudianteCon[0][9] - 1
+    }
+
+    this.http.post("http://127.0.0.1:8000/inactivarCalendario", inactivar).subscribe({
+      next: res => {
+        
+      },
+      error: err => {
+        Notiflix.Loading.remove()
+        Notiflix.Notify.warning('Error en el cambio de estado')
+      }
+    })
   }
 }
