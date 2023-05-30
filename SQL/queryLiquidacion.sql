@@ -22,7 +22,7 @@ insert into participacionestudiante values(0017,'REQU','EN',0018,'20201020009');
 insert into participacionestudiante values(0018,'REQU','EN',0018,'20201020036');
 insert into participacionestudiante values(0019,'REQU','EN',0019,'20201020008');
 insert into participacionestudiante values(0020,'REQU','EN',0019,'20201020009');
-insert into participacionestudiante values(0021,'REQU','EN',0019,'20201020036');
+-- insert into participacionestudiante values(0021,'REQU','EN',0019,'20201020036');
 
 insert into participacionestudiante values(0022,'REQU','FN',0020,'20201020008');
 insert into participacionestudiante values(0023,'REQU','FN',0020,'20201020009');

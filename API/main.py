@@ -68,9 +68,9 @@ async def root():
     result = ConexionBD.consultarEstudianteConvocatoria()
     return {"data":result}
 
-@app.get('/listaLiquidacion')
-async def root():
-    result = ConexionBD.consultarLiquidacion()
+@app.get('/listaLiquidacion/{periodo}')
+async def root(periodo:str):
+    result = ConexionBD.consultarLiquidacion(periodo)
     return {"data":result}
 
 @app.post('/inactivarAct')
@@ -82,3 +82,8 @@ async def root(peticion:peticionInactivacionPeriodo):
 @app.get('/seleccionados/{periodo}')
 async def root(periodo:str):
     result = ConexionBD.obtenerSeleccionados(periodo)
+
+@app.get('/periodoInactivo')
+async def root():
+    result = ConexionBD.periodoInactivo()
+    return {"data":result}

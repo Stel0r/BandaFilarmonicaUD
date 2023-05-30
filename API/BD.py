@@ -65,16 +65,16 @@ class ConexionBD:
         connection.close()
         return result
     
-    def consultarLiquidacion():
+    def consultarLiquidacion(periodo:str):
         oracledb.init_oracle_client()
         connection = oracledb.connect(user= ConexionBD.user, password=ConexionBD.password,host="localhost", port=1521, service_name="xe")
         cursor = connection.cursor()
-        cursor.execute("select e.nombre ||' '|| e.apellido Estudiante, e.codestudiante codigo, un.nomunidad facultad, e.correo correo, sum(trunc(mod((c.fechafin - c.fechainicio)*24,24))) Nohoras" +
-                        " from estudiante e, unidad u, unidad un, calendario c, participacionestudiante p " + 
-                        "where e.codestudiante = p.codestudiante and " +
-                        "e.codunidad = u.codunidad and " +
-                        "u.uni_codunidad = un.codunidad and " +
-                        "c.conseccalendario = p.conseccalendario " +
+        cursor.execute("select e.nombre ||' '|| e.apellido Estudiante, e.codestudiante codigo, un.nomunidad facultad, e.correo correo, " +
+                        "sum(trunc(mod((c.fechafin - c.fechainicio)*24,24))) Nohoras " +
+                        "from estudiante e, unidad u, unidad un, calendario c, participacionestudiante p, obra o " +
+                        "where e.codestudiante = p.codestudiante and e.codunidad = u.codunidad and " +
+                        "u.uni_codunidad = un.codunidad and c.conseccalendario = p.conseccalendario and " +
+                        "o.idobra = c.idobra and o.idperiodo like "+ periodo +" " +
                         "group by e.nombre ||' '|| e.apellido , e.codestudiante , un.nomunidad, e.correo")
         result = cursor.fetchall()
         connection.close()
@@ -91,4 +91,15 @@ class ConexionBD:
         connection.close()
         return result
 
-
+    def periodoInactivo():
+        oracledb.init_oracle_client()
+        connection = oracledb.connect(user= ConexionBD.user, password=ConexionBD.password,host="localhost", port=1521, service_name="xe")
+        cursor = connection.cursor()
+        cursor.execute("select distinct o.idperiodo from  obra o, calendario c " +
+                        "where c.idobra = o.idobra and " + 
+                        "(o.idperiodo, c.conseccalendario) in (select o.idperiodo , max(c.conseccalendario) from obra o, calendario c " + 
+                        "where c.idobra = o.idobra and lower(c.idtipocalen) like 'en' group by o.idperiodo) " +
+                        "and lower(c.idestado) like 'inactivo'")
+        result = cursor.fetchall()
+        connection.close()
+        return result
