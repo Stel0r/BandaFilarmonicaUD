@@ -62,7 +62,7 @@ insert into calendario values('REQU','FN',0022,'Inactivo',to_date('06/09/2022 8:
 -- Periodo 202301
 
 insert into calendario values('PSSM','PA',0023,'Inactivo',to_date('22/03/2023 06:00 AM', 'dd/mm/yyyy HH:MI AM'),to_date('28/03/2023 06:00 PM', 'dd/mm/yyyy HH:MI AM'));
-insert into calendario values('PSSM','CN',0024,'Inactivo',to_date('02/04/2023 06:00 AM', 'dd/mm/yyyy HH:MI AM'),to_date('09/04/2023 06:00 PM', 'dd/mm/yyyy HH:MI AM'));
+insert into calendario values('PSSM','CN',0024,'Activo',to_date('02/04/2023 06:00 AM', 'dd/mm/yyyy HH:MI AM'),to_date('09/04/2023 06:00 PM', 'dd/mm/yyyy HH:MI AM'));
 insert into calendario values('PSSM','SL',0025,'Inactivo',to_date('10/04/2023 12:00 PM', 'dd/mm/yyyy HH:MI AM'),to_date('11/04/2023 04:00 PM', 'dd/mm/yyyy HH:MI AM'));
 
 --ensayos
