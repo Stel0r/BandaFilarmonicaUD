@@ -56,11 +56,14 @@ class ConexionBD:
         oracledb.init_oracle_client()
         connection = oracledb.connect(user= ConexionBD.user, password=ConexionBD.password,host="localhost", port=1521, service_name="xe")
         cursor = connection.cursor()
-        cursor.execute("select e.codEstudiante, e.nombre, e.apellido, f.nomUnidad, c.nomUnidad, i.nomInstrumento, max(con.calificacion) " 
-        +"from estudiante e, unidad f, unidad c, convocatoriaEstudiante con, instrumento i " 
-        +"where c.codunidad = e.codunidad and f.codunidad = c.uni_codunidad and  i.idInstrumento = con.idInstrumento and e.codEstudiante = con.codEstudiante and " 
-        +"(con.idInstrumento,con.calificacion) in (select idInstrumento, max(calificacion) from convocatoriaEstudiante group by idInstrumento) "
-        +"group by i.idinstrumento, e.codEstudiante, e.nombre, e.apellido, f.nomUnidad, c.nomUnidad, i.nomInstrumento")
+        cursor.execute("select e.codEstudiante, e.nombre ||' '|| e.apellido, con.idinstrumento, con.idobra, f.nomUnidad, c.nomUnidad, i.nomInstrumento, cal.conseccalendario + 1 " +
+                        "from estudiante e, unidad f, unidad c, convocatoriaEstudiante con, instrumento i, calendario cal " +
+                        "where c.codunidad = e.codunidad and f.codunidad = c.uni_codunidad and " + 
+                        "i.idInstrumento = con.idInstrumento and e.codEstudiante = con.codEstudiante and " +
+                        "cal.conseccalendario like " +
+                        "(select distinct cal.conseccalendario from calendario cal, convocatoriaestudiante cov " +
+                        "where TO_DATE(cal.fechainicio, 'dd/mm/yyyy') like TO_DATE(cov.fechainicio, 'dd/mm/yyyy')) " +
+                        "order by con.calificacion desc")
         result = cursor.fetchall()
         connection.close()
         return result
@@ -101,5 +104,35 @@ class ConexionBD:
                         "where c.idobra = o.idobra and lower(c.idtipocalen) like 'en' group by o.idperiodo) " +
                         "and lower(c.idestado) like 'inactivo'")
         result = cursor.fetchall()
+        connection.close()
+        return result
+    
+    def obtenerInstrumentos():
+        oracledb.init_oracle_client()
+        connection = oracledb.connect(user= ConexionBD.user, password=ConexionBD.password,host="localhost", port=1521, service_name="xe")
+        cursor = connection.cursor()
+        cursor.execute("select r26.idInstrumento, r26.num from relationship_26 r26 where r26.idobra like " +
+                        "(select distinct cal.idobra from calendario cal, convocatoriaestudiante cov " +
+                        "where TO_DATE(cal.fechainicio, 'dd/mm/yyyy') like TO_DATE(cov.fechainicio, 'dd/mm/yyyy'))")
+        result = cursor.fetchall()
+        connection.close()
+        return result
+    
+    def maxIdParticipacion():
+        oracledb.init_oracle_client()
+        connection = oracledb.connect(user= ConexionBD.user, password=ConexionBD.password,host="localhost", port=1521, service_name="xe")
+        cursor = connection.cursor()
+        cursor.execute("select max(consecasis) + 1 from participacionestudiante")
+        result = cursor.fetchall()
+        connection.close()
+        return result
+
+    def agregarParticipacion(consecasis:str, idobra:str, conseccalendario:str, codestudiante:str):
+        oracledb.init_oracle_client()
+        connection = oracledb.connect(user=ConexionBD.user, password=ConexionBD.password,host="localhost", port=1521, service_name="xe")
+        cursor = connection.cursor()
+        query = "INSERT INTO participacionestudiante values("+consecasis+",'"+idobra+"','"+ "SL" +"',"+conseccalendario+",'" + codestudiante + "')"
+        result = cursor.execute(query)
+        connection.commit()
         connection.close()
         return result

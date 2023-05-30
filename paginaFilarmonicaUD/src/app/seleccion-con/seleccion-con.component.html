@@ -10,7 +10,6 @@
     <tr>
       <th scope="col">Codigo</th>
       <th scope="col">Nombre</th>
-      <th scope="col">Apellido</th>
       <th scope="col">Facultad</th>
       <th scope="col">Proyecto Curricular</th>
       <th scope="col">Instrumento</th>
@@ -18,12 +17,15 @@
   </thead>
   <tbody>
     <tr *ngFor="let estudiante of listaEstudianteCon">
-      <td>{{ estudiante[0] }}</td>
-      <td>{{ estudiante[1] }}</td>
       <td>{{ estudiante[2] }}</td>
       <td>{{ estudiante[3] }}</td>
-      <td>{{ estudiante[4] }}</td>
-      <td>{{ estudiante[5] }}</td>
+      <td>{{ estudiante[6] }}</td>
+      <td>{{ estudiante[7] }}</td>
+      <td>{{ estudiante[8] }}</td>
     </tr>
   </tbody>
 </table>
+
+<div class="input-group mb-3 d-flex justify-content-center">
+  <button (click)="seleccionar()" class="btn btn-primary" > Seleccionar </button>
+</div>
