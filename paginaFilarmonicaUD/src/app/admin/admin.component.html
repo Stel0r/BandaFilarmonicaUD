@@ -15,12 +15,12 @@
         </button>
       </li>
       <li>
-        <button class="btn btn-primary boton-menu" [routerLink]="['Seleccion']">
+        <button class="btn btn-primary boton-menu" [disabled] = "this.habilitarSeleccion()" [routerLink]="['Seleccion']">
           Seleccion
         </button>
       </li>
       <li>
-        <button class="btn btn-primary boton-menu" [routerLink]="['Asistencia']">Asistencia</button>
+        <button class="btn btn-primary boton-menu" (click)="this.abrirAsistencia()" [disabled] = "this.habilitarAsistencia()">Asistencia</button>
       </li>
       <li>
         <button

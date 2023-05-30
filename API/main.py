@@ -31,6 +31,10 @@ class peticionInactivacionPeriodo(BaseModel):
 class InactivarConvocatoria(BaseModel):
     conseccalendario:int
 
+class listaAsistencia(BaseModel):
+    data:list
+    event:int
+
 def reasignarConvocatorio():
     resultado = []
     listEstudiantes = ConexionBD.consultarEstudianteConvocatoria()
@@ -106,6 +110,7 @@ async def root(peticion:peticionInactivacionPeriodo):
 @app.get('/seleccionados/{periodo}')
 async def root(periodo:str):
     result = ConexionBD.obtenerSeleccionados(periodo)
+    return {"data":result}
 
 @app.get('/periodoInactivo')
 async def root():
@@ -122,3 +127,14 @@ async def root(peticion:InactivarConvocatoria):
     print(peticion)
     result = ConexionBD.inactivarConvocatoria(str(peticion.conseccalendario))
     return {"message": "completado"}
+
+@app.get('/calendario/{periodo}')
+async def root(periodo):
+    result = ConexionBD.obtenerCalendario(periodo)
+    return {"data":result}
+
+@app.post('/subirAsistencia')
+async def root(body:listaAsistencia):
+    for e in body.data:
+        ConexionBD.subirAsistencia(e,body.event)    
+    

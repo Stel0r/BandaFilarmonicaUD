@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Evento } from '../modelos/evento'
 import { ActivatedRoute } from '@angular/router';
 import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
+import { CalendarioService } from '../servicios/calendario.service';
 
 @Component({
     selector: 'app-calendario',
@@ -36,7 +37,7 @@ export class CalendarioComponent {
     numDia: number = 0
     eventos: Map<string,Array<Evento>> = new Map()
 
-    constructor(private http: HttpClient,private ruta :ActivatedRoute) { }
+    constructor(private http: HttpClient,private ruta :ActivatedRoute,private calenService:CalendarioService) { }
 
 
     ngOnInit() {
@@ -119,9 +120,7 @@ export class CalendarioComponent {
         let fechaSeparada = fechaS.split("T")
         let diaLista = fechaSeparada[0].split("-")
         let horaLista = fechaSeparada[1].split(":")
-        console.log(diaLista)
         let fecha = new Date(parseInt(diaLista[0]),parseInt(diaLista[1])-1,parseInt(diaLista[2]),parseInt(horaLista[0]),parseInt(horaLista[1]))
-        console.log(fecha)
         return fecha
     }
 
@@ -132,7 +131,6 @@ export class CalendarioComponent {
             next: (res) => {
                 if(res.data.length != 0){
                     for (let e of res.data){
-                        console.log(e)
                         let evento = new Evento()
                         evento.nombreObra = e[0]
                         evento.tipoEvento = e[1]
@@ -140,7 +138,6 @@ export class CalendarioComponent {
                         evento.fechaI = this.crearFecha(e[3].toString())
                         evento.fechaF = this.crearFecha(e[4].toString())
                         evento.consecCalen = e[5]
-                        console.log(evento)
                         let dia = evento.fechaI.getDate();
                         let fechafinal:number
                         if(this.mes != evento.fechaF.getMonth()){
@@ -189,6 +186,7 @@ export class CalendarioComponent {
         this.http.post("http://127.0.0.1:8000/inactivarAct",body).subscribe(
             (next) => {
                 this.traerDatosMes();
+                this.calenService.actualizarCalendario(this.periodo)
             }
         )
     }

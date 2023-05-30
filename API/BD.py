@@ -37,7 +37,7 @@ class ConexionBD:
         oracledb.init_oracle_client()
         connection = oracledb.connect(user= ConexionBD.user, password=ConexionBD.password,host="localhost", port=1521, service_name="xe")
         cursor = connection.cursor()
-        query = "select o.titulo, t.desctipocalendario, c.idestado, c.fechainicio, c.fechafin, o.idobra, c.conseccalendario from obra o,tipocalendario t, calendario c where t.idtipocalen = c.idtipocalen and o.idobra = c.idobra and o.idperiodo = "+periodo+" and extract(MONTH from c.fechainicio) = "+mes+" ORDER BY c.fechainicio"
+        query = "select o.titulo, t.desctipocalendario, c.idestado, c.fechainicio, c.fechafin, o.idobra, c.conseccalendario,t.idtipocalen from obra o,tipocalendario t, calendario c where t.idtipocalen = c.idtipocalen and o.idobra = c.idobra and o.idperiodo = "+periodo+" and extract(MONTH from c.fechainicio) = "+mes+" ORDER BY c.fechainicio"
         cursor.execute(query)
         result = cursor.fetchall()
         connection.close()
@@ -88,7 +88,7 @@ class ConexionBD:
         oracledb.init_oracle_client()
         connection = oracledb.connect(user= ConexionBD.user, password=ConexionBD.password,host="localhost", port=1521, service_name="xe")
         cursor = connection.cursor()
-        query = "select o.titulo, t.desctipocalendario, c.idestado, c.fechainicio, c.fechafin, o.idobra, c.conseccalendario from obra o,tipocalendario t, calendario c where t.idtipocalen = c.idtipocalen and o.idobra = c.idobra and o.idperiodo = "+periodo+" and extract(MONTH from c.fechainicio) = "+mes+" ORDER BY c.fechainicio"
+        query = "select e.nombre || ' ' || e.apellido, e.codestudiante from participacionestudiante p,estudiante e, obra o where e.codestudiante = p.codestudiante and p.idtipocalen = 'SL' and o.idobra = p.idobra and o.idperiodo = "+periodo
         cursor.execute(query)
         result = cursor.fetchall()
         connection.close()
@@ -145,3 +145,30 @@ class ConexionBD:
         cursor.execute(query)
         connection.commit()
         connection.close()
+
+    def obtenerCalendario(periodo):
+        oracledb.init_oracle_client()
+        connection = oracledb.connect(user=ConexionBD.user, password=ConexionBD.password,host="localhost", port=1521, service_name="xe")
+        cursor = connection.cursor()
+        query = "select o.titulo, t.desctipocalendario, c.idestado, c.fechainicio, c.fechafin, o.idobra, c.conseccalendario,t.idtipocalen from obra o,tipocalendario t, calendario c where t.idtipocalen = c.idtipocalen and o.idobra = c.idobra and o.idperiodo = "+periodo+" ORDER BY c.fechainicio"
+        cursor.execute(query)
+        result = cursor.fetchall()
+        connection.commit()
+        connection.close()
+        return result
+    
+    def subirAsistencia(estudiante,event):
+        oracledb.init_oracle_client()
+        connection = oracledb.connect(user=ConexionBD.user, password=ConexionBD.password,host="localhost", port=1521, service_name="xe")
+        cursor = connection.cursor()
+        query = "select max(consecasis) from participacionestudiante"
+        cursor.execute(query)
+        max = cursor.fetchone()[0]
+        print(estudiante)
+        print(event)
+        query = "insert into participacionestudiante select "+str(max+1)+",c.idobra,c.idtipocalen,c.conseccalendario,"+estudiante+" from calendario c where c.conseccalendario = "+str(event)
+        print(query)
+        cursor.execute(query)
+        connection.commit()
+        connection.close()
+        return None
