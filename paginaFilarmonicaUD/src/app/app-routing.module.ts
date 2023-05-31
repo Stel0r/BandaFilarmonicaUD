@@ -20,7 +20,7 @@ const routes: Routes = [
       {path:'Calendario/:periodo', component:CalendarioComponent},
       {path:'Liquidacion', component:LiquidacionEstudianteComponent},
       {path:'Seleccion', component:SeleccionConComponent},
-      {path:'Asistencia', component:AsistenciaComponent}
+      {path:'Asistencia/:periodo', component:AsistenciaComponent}
     ]
   }
 ];

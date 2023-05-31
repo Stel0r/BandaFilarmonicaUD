@@ -5,4 +5,6 @@ export class Evento{
     fechaI:Date
     fechaF:Date
     consecCalen:number
+    idObra:string
+    idTipoCalen:string
 }

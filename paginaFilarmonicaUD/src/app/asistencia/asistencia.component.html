@@ -1,11 +1,14 @@
 <div class="container">
-    <p>Actividad de hoy: </p>
-    <div class="lista-Asistencia">
-        <div class="item-lista">
-            <div class="cabezal" style="grid-column: 1/3;grid-row: 1;">Estudiante</div>
-            <div class="cabezal" style="grid-column: 3;grid-row: 1;">Asistencia</div>
-            <p class = "nombre-lista">Nombre Estudiante</p>
-            <input class="checkbox-lista" type="checkbox">
-        </div>
-    </div>
+    <p>Actividad de hoy: {{this.eventoHoy.nombreObra}}  |  {{this.eventoHoy.tipoEvento}}</p>
+    <ul style="padding:0px;">
+        <li class="item-lista">
+            <p style="grid-column: 1;width: 700px; margin:0px" class="cabezal">Estudiante</p>
+            <p style="grid-column: 2;margin:0px">Asistencia</p>
+        </li>
+        <li *ngFor = "let e of listaEstudiantes" class="item-lista">
+            <p class="nombre-lista">{{e[0]}}</p>
+            <input type="checkbox" class="checkbox-lista" [ngModel] = "listaAsistencia.get(e[1])" (ngModelChange)="listaAsistencia.set(e[1],$event)" name="" id="">
+        </li>
+    </ul>
+    <button class="btn btn-primary" (click)="enviarAsistencia()" style="margin:auto;display: block;">Enviar Asistencia</button>
 </div>
