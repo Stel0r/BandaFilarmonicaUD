@@ -15,6 +15,7 @@ import { CalendarioComponent } from './calendario/calendario.component';
 import { LiquidacionEstudianteComponent } from './liquidacion-estudiante/liquidacion-estudiante.component';
 import { SeleccionConComponent } from './seleccion-con/seleccion-con.component';
 import { AsistenciaComponent } from './asistencia/asistencia.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
     declarations: [
@@ -27,7 +28,8 @@ import { AsistenciaComponent } from './asistencia/asistencia.component';
         CalendarioComponent,
         LiquidacionEstudianteComponent,
         SeleccionConComponent,
-        AsistenciaComponent
+        AsistenciaComponent,
+        LoginComponent
     ],
     providers: [],
     bootstrap: [AppComponent],

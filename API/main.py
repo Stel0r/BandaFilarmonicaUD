@@ -5,6 +5,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from BD import ConexionBD
 from Correo import CorreoSer
 
+class login(BaseModel):
+    correo:str
+    password:str
+
 class correo(BaseModel):
     asunto:str
     contenidos:str
@@ -143,3 +147,12 @@ async def root():
     result = ConexionBD.obtenerPeriodos()
     return {"data":result}
     
+@app.post('/validate')
+async def root(l:login):
+    valid = ConexionBD.validarLogin(l.correo,l.password)
+    if valid:
+        return {"message":"logeado correctamente",
+                "codigo" : 202}
+    else:
+        return {"message":"la contraseña o Correo son incorrectos, intentelo nuevamente",
+                "codigo" : 404}

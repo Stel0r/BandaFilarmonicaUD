@@ -12,3 +12,8 @@ export interface unidadesResponse{
 export interface liquidacionResponse{
     data:Array<any>
 }
+
+export interface LogResponse{
+    message:string
+    codigo:number
+}

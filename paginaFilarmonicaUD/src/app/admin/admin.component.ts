@@ -5,6 +5,7 @@ import { Evento } from '../modelos/evento';
 import { HttpClient } from '@angular/common/http';
 import { estudianteConResponse } from '../modelos/responses';
 import { estudianteResponse } from '../modelos/responses';
+import { AdminService } from '../admin.service';
 
 @Component({
   selector: 'app-admin',
@@ -18,13 +19,16 @@ export class AdminComponent {
 
 
 
-  constructor(private router:Router,private route:ActivatedRoute,private calenService:CalendarioService,private http:HttpClient){
+  constructor(private router:Router,private route:ActivatedRoute,private calenService:CalendarioService,private http:HttpClient,private adminService:AdminService){
 
   }
 
   ngOnInit(){
     if(this.router.url != "/Admin"){
       this.router.navigate(['Admin'])
+    }
+    if(!this.adminService.hayUsuarioLogeado){
+      this.router.navigate(['login'])
     }
     this.calenService.actualizarCalendario(this.periodo)
     this.http.get<estudianteResponse>("http://127.0.0.1:8000/obtenerPeriodos").subscribe((res)=>{

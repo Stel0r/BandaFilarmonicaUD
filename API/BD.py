@@ -182,3 +182,15 @@ class ConexionBD:
         result = cursor.fetchall()
         connection.close()
         return result
+    
+    def validarLogin(correo,password):
+        oracledb.init_oracle_client()
+        connection = oracledb.connect(user=ConexionBD.user, password=ConexionBD.password,host="localhost", port=1521, service_name="xe")
+        cursor = connection.cursor()
+        query = "select * from registrousuario"
+        cursor.execute(query)
+        result = cursor.fetchall()
+        for r in result:
+            if r[0] == correo and r[1] == password:
+                return True
+        return False
