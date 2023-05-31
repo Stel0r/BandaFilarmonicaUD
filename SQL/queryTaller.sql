@@ -146,9 +146,6 @@ insert into personalobra values('FACAR',0002,'PROZ',0001,'MSIM',to_date('02/02/2
 insert into personalobra values('VICRE',0001,'VIC2',0001,'MSIM',to_date('02/02/2023','DD/MM/YYYY'),NULL);
 insert into personalobra values('VICRE',0001,'VIC3',0001,'MSIM',to_date('02/02/2023','DD/MM/YYYY'),NULL);
 
-
-
-
 insert into laborpersonalobra values(0001,'FACIN',0002,'PROR',0001,202301,'DIRMU',2);
 insert into laborpersonalobra values(0002,'FACIN',0002,'PROR',0001,202301,'EVAMU',2);
 insert into laborpersonalobra values(0003,'FACIN',0002,'PROV',0001,202301,'COOSI',2);
