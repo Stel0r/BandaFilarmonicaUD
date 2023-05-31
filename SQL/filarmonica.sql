@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 11g                           */
-/* Created on:     27/05/2023 04:20:43 p. m.                    */
+/* Created on:     30/05/2023 09:07:43 p. m.                    */
 /*==============================================================*/
 
 
@@ -183,6 +183,8 @@ drop index RELATIONSHIP_17_FK;
 drop index RELATIONSHIP_2_FK;
 
 drop table PERSONALOBRA cascade constraints;
+
+drop table REGISTROUSUARIO cascade constraints;
 
 drop index RELATIONSHIP_26_FK;
 
@@ -628,6 +630,16 @@ create index RELATIONSHIP_2_FK on PERSONALOBRA (
 /*==============================================================*/
 create index RELATIONSHIP_17_FK on PERSONALOBRA (
    IDOBRA ASC
+);
+
+/*==============================================================*/
+/* Table: REGISTROUSUARIO                                       */
+/*==============================================================*/
+create table REGISTROUSUARIO 
+(
+   "USER"               VARCHAR2(20)         not null,
+   PASSWORD             VARCHAR2(20)         not null,
+   constraint PK_REGISTROUSUARIO primary key ("USER")
 );
 
 /*==============================================================*/
