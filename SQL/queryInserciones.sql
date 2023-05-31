@@ -22,6 +22,10 @@ Estructura:
 
 */
 
+-- registrar el usuario
+
+insert into registrousuario values('orquestafilarmonicaud2023@gmail.com', 'coordinadorFilarmonica');
+
 -- introducimos el Estado Activo e Inactivo: 
 
 insert into estado values('Activo');
