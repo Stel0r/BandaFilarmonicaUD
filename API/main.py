@@ -137,4 +137,9 @@ async def root(periodo):
 async def root(body:listaAsistencia):
     for e in body.data:
         ConexionBD.subirAsistencia(e,body.event)    
+
+@app.get('/obtenerPeriodos')
+async def root():
+    result = ConexionBD.obtenerPeriodos()
+    return {"data":result}
     

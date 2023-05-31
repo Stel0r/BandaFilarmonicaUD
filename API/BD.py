@@ -172,3 +172,13 @@ class ConexionBD:
         connection.commit()
         connection.close()
         return None
+    
+    def obtenerPeriodos():
+        oracledb.init_oracle_client()
+        connection = oracledb.connect(user=ConexionBD.user, password=ConexionBD.password,host="localhost", port=1521, service_name="xe")
+        cursor = connection.cursor()
+        query = "select idperiodo from periodo"
+        cursor.execute(query)
+        result = cursor.fetchall()
+        connection.close()
+        return result

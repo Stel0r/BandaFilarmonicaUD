@@ -47,7 +47,6 @@ export class CalendarioComponent {
                 this.año = parseInt(this.periodo.substring(0,4))
             }
         })
-        console.log(this.mes)
         this.date = new Date(this.año, this.mes)
         this.date.setMonth(this.mes)
         this.date.setFullYear(this.año)
@@ -61,8 +60,10 @@ export class CalendarioComponent {
 
     ngAfterViewInit() {
         this.traerDatosMes()
-        let diaHoy = document.getElementById(new Date().getDate().toString())!
-        diaHoy.classList.add("dia-num-hoy")
+        if(this.año == new Date().getFullYear()){
+            let diaHoy = document.getElementById(new Date().getDate().toString())!
+            diaHoy.classList.add("dia-num-hoy")
+        }
     }
 
     seleccionarDia(dia: number) {
@@ -104,7 +105,7 @@ export class CalendarioComponent {
             this.dias = Array(lastDay.getDate()).fill(0).map((x, i) => i + 1)
             this.diaInicial = Array(firstDay.getDay()).fill(0).map((x, i) => i + 1)
             this.diasFinales = Array(6 - lastDay.getDay()).fill(0).map((x, i) => i + 1)
-            if (this.mes == new Date().getMonth()) {
+            if (this.mes == new Date().getMonth() && this.año == new Date().getFullYear()) {
                 let diaHoy = document.getElementById(new Date().getDate().toString())!
                 diaHoy.classList.add("dia-num-hoy")
             } else {

@@ -3,10 +3,7 @@
     <ul>
       <li>
         <select [(ngModel)] = "this.periodo" (change)="this.cambioPeriodo()" name="" id="" style="width: 100%;">
-          <option value="202301">202301</option>
-          <option value="202302">202302</option>
-          <option value="202201">202201</option>
-          <option value="202202">202202</option>
+          <option *ngFor = "let p of listaPeriodos" [value]="p">{{p}}</option>
         </select>
       </li>
       <li>

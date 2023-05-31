@@ -29,8 +29,6 @@ export class CalendarioService {
             evento.idObra = e[5]
             evento.idTipoCalen = e[7] 
             if (evento.fechaI < ahora && evento.fechaF > ahora) {
-              console.log(e)
-              console.log(evento)
               this.eventosAhora.push(evento)
             }
             this.calendario.push(evento)
@@ -67,7 +65,6 @@ export class CalendarioService {
   estadoPlaneacion() {
     for (let e of this.calendario) {
       if (e.idTipoCalen === "PA") {
-        console.log(e)
         return e.estado
       }
     }

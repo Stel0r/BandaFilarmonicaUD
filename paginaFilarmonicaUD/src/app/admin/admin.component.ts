@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CalendarioService } from '../servicios/calendario.service';
 import { Evento } from '../modelos/evento';
+import { HttpClient } from '@angular/common/http';
+import { estudianteConResponse } from '../modelos/responses';
+import { estudianteResponse } from '../modelos/responses';
 
 @Component({
   selector: 'app-admin',
@@ -10,29 +13,32 @@ import { Evento } from '../modelos/evento';
 })
 export class AdminComponent {
   periodo:string = "202301"
+  listaPeriodos: Array<string> = []
 
 
 
 
-  constructor(private router:Router,private route:ActivatedRoute,private calenService:CalendarioService){
+  constructor(private router:Router,private route:ActivatedRoute,private calenService:CalendarioService,private http:HttpClient){
 
   }
 
   ngOnInit(){
-    console.log(this.router.url.split("/"))
     if(this.router.url != "/Admin"){
       this.router.navigate(['Admin'])
     }
     this.calenService.actualizarCalendario(this.periodo)
+    this.http.get<estudianteResponse>("http://127.0.0.1:8000/obtenerPeriodos").subscribe((res)=>{
+      for (let p of res.data){
+        this.listaPeriodos.push(p[0])
+      }
+    })
   }
 
   abrirCalendario(){
-    console.log("llego")
     this.router.navigate(['Calendario',this.periodo],{relativeTo:this.route})
   }
 
   abrirAsistencia(){
-    console.log("llego")
     this.router.navigate(['Asistencia',this.periodo],{relativeTo:this.route})
   }
 
@@ -53,7 +59,6 @@ export class AdminComponent {
   }
 
   habilitarLiquidacion(){
-    console.log(this.calenService.liquidacionValida())
     return !this.calenService.liquidacionValida()
   }
   
