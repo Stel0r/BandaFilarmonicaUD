@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 11g                           */
-/* Created on:     30/05/2023 09:07:43 p. m.                    */
+/* Created on:     30/05/2023 09:24:07 p. m.                    */
 /*==============================================================*/
 
 
@@ -637,8 +637,8 @@ create index RELATIONSHIP_17_FK on PERSONALOBRA (
 /*==============================================================*/
 create table REGISTROUSUARIO 
 (
-   "USER"               VARCHAR2(20)         not null,
-   PASSWORD             VARCHAR2(20)         not null,
+   "USER"               VARCHAR2(60)         not null,
+   PASSWORD             VARCHAR2(60)         not null,
    constraint PK_REGISTROUSUARIO primary key ("USER")
 );
 
