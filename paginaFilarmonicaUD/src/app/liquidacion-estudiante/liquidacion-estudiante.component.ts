@@ -15,6 +15,7 @@ import { liquidacionResponse } from '../modelos/responses';
 export class LiquidacionEstudianteComponent {
   listaLiquidacion : Array<any>
   periodo : string
+  horas : number = 38
 
   pdfLista : Array<any> = [[ 'Estudiante', 'Codigo', 'Facultad', '# de Horas' ]]
 
@@ -81,13 +82,13 @@ export class LiquidacionEstudianteComponent {
     Notiflix.Loading.standard('Enviando Correo')
 
     for(let estudiante of this.listaLiquidacion){
-      let parametros = {
-        asunto: "Electiva cursada en el grupo SinfonicaUD - periodo XXXX",
-        contenidos: "El estudiante " + estudiante[0] + " curso la electiva participacion sinfonicaUD durante el periodo XXXX",
-        remitente: estudiante[3]
-      }
-  
-      this.http.post("http://127.0.0.1:8000/enviarCorreo",parametros).subscribe(
+      if(estudiante[4] == this.horas){
+        let parametros = {
+          asunto: "Electiva cursada en el grupo SinfonicaUD - periodo XXXX",
+          contenidos: "El estudiante " + estudiante[0] + " curso la electiva participacion sinfonicaUD durante el periodo XXXX",
+          remitente: estudiante[3]
+        }
+        this.http.post("http://127.0.0.1:8000/enviarCorreo",parametros).subscribe(
         {
           next: res => {
             Notiflix.Notify.success('Email Enviado Correctamente a: ' + estudiante[0])
@@ -97,6 +98,7 @@ export class LiquidacionEstudianteComponent {
             Notiflix.Notify.warning('No se pudo enviar el Email Correctamente')
           }
         })
+      }
     }
     Notiflix.Loading.remove()
     Notiflix.Notify.success("Envio exitoso")
