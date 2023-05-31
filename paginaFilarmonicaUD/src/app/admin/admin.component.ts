@@ -21,7 +21,7 @@ export class AdminComponent {
   ngOnInit(){
     console.log(this.router.url.split("/"))
     if(this.router.url != "/Admin"){
-      this.periodo = this.router.url.split("/")[3]
+      this.router.navigate(['Admin'])
     }
     this.calenService.actualizarCalendario(this.periodo)
   }
@@ -55,6 +55,11 @@ export class AdminComponent {
   habilitarLiquidacion(){
     console.log(this.calenService.liquidacionValida())
     return !this.calenService.liquidacionValida()
+  }
+  
+
+  habilitarCalendario(){
+    return this.calenService.calendario.length == 0
   }
 
 

@@ -10,7 +10,7 @@
         </select>
       </li>
       <li>
-        <button class="btn btn-primary boton-menu" (click)="this.abrirCalendario()">
+        <button class="btn btn-primary boton-menu"  [disabled] = "this.habilitarCalendario()" (click)="this.abrirCalendario()">
           Calendario
         </button>
       </li>
