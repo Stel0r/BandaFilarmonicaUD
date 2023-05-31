@@ -110,16 +110,19 @@ insert into estudiante values('20221413013', 'ARTMU', 'Pedro', 'Garcia', to_date
 insert into estudiante values('20201514014', 'ARTDA', 'Laura', 'Martinez', to_date('19/09/2020','dd/mm/yyyy'), to_date('10/04/1994','dd/mm/yyyy'), 'laura.martinez@gmail.com');
 
 --creamos la convocatoria
-insert into convocatoriaestudiante values('PSSM', 001,'20201020009','VIOL',to_date('02/04/2023','dd/mm/yyyy'),to_date('09/04/2023','dd/mm/yyyy'),4.4);
-insert into convocatoriaestudiante values('PSSM', 002,'20201020036','VIOL',to_date('02/04/2023','dd/mm/yyyy'),to_date('09/04/2023','dd/mm/yyyy'),4.8);
-insert into convocatoriaestudiante values('PSSM', 003,'20201020008','OBOE',to_date('02/04/2023','dd/mm/yyyy'),to_date('09/04/2023','dd/mm/yyyy'),4.5);
-insert into convocatoriaestudiante values('PSSM', 004, '20221413013', 'VIOL', to_date('02/04/2023','dd/mm/yyyy'), to_date('09/04/2023','dd/mm/yyyy'), 2);
-insert into convocatoriaestudiante values('PSSM', 005, '20220909009', 'FLAU', to_date('02/04/2023','dd/mm/yyyy'), to_date('09/04/2023','dd/mm/yyyy'), 4.5);
-insert into convocatoriaestudiante values('PSSM', 006, '20211211011', 'FLAU', to_date('02/04/2023','dd/mm/yyyy'), to_date('09/04/2023','dd/mm/yyyy'), 4.6);
-insert into convocatoriaestudiante values('PSSM', 007, '20210404004', 'BAJO', to_date('02/04/2023','dd/mm/yyyy'), to_date('09/04/2023','dd/mm/yyyy'), 4.7);
-insert into convocatoriaestudiante values('PSSM', 008, '20200505005', 'OBOE', to_date('02/04/2023','dd/mm/yyyy'), to_date('09/04/2023','dd/mm/yyyy'), 1);
-insert into convocatoriaestudiante values('PSSM', 009, '20220606006', 'BAJO', to_date('02/04/2023','dd/mm/yyyy'), to_date('09/04/2023','dd/mm/yyyy'), 4.4);
-insert into convocatoriaestudiante values('PSSM', 010, '20210707007', 'FLAU', to_date('02/04/2023','dd/mm/yyyy'), to_date('09/04/2023','dd/mm/yyyy'), 5);
+insert into convocatoriaestudiante values('REQU', 001,'20201020009','FLAU',to_date('02/07/2022','dd/mm/yyyy'),to_date('10/07/2022','dd/mm/yyyy'),4.4);
+
+insert into convocatoriaestudiante values('PSSM', 002, '20201020009','VIOL',to_date('02/04/2023','dd/mm/yyyy'),to_date('09/04/2023','dd/mm/yyyy'),4.4);
+insert into convocatoriaestudiante values('PSSM', 003, '20201020036','VIOL',to_date('02/04/2023','dd/mm/yyyy'),to_date('09/04/2023','dd/mm/yyyy'),4.8);
+insert into convocatoriaestudiante values('PSSM', 004, '20201020008','OBOE',to_date('02/04/2023','dd/mm/yyyy'),to_date('09/04/2023','dd/mm/yyyy'),4.5);
+insert into convocatoriaestudiante values('PSSM', 005, '20221413013', 'VIOL', to_date('02/04/2023','dd/mm/yyyy'), to_date('09/04/2023','dd/mm/yyyy'), 2);
+insert into convocatoriaestudiante values('PSSM', 006, '20220909009', 'FLAU', to_date('02/04/2023','dd/mm/yyyy'), to_date('09/04/2023','dd/mm/yyyy'), 4.5);
+insert into convocatoriaestudiante values('PSSM', 007, '20211211011', 'FLAU', to_date('02/04/2023','dd/mm/yyyy'), to_date('09/04/2023','dd/mm/yyyy'), 4.6);
+insert into convocatoriaestudiante values('PSSM', 008, '20210404004', 'BAJO', to_date('02/04/2023','dd/mm/yyyy'), to_date('09/04/2023','dd/mm/yyyy'), 4.7);
+insert into convocatoriaestudiante values('PSSM', 009, '20200505005', 'OBOE', to_date('02/04/2023','dd/mm/yyyy'), to_date('09/04/2023','dd/mm/yyyy'), 1);
+insert into convocatoriaestudiante values('PSSM', 010, '20220606006', 'BAJO', to_date('02/04/2023','dd/mm/yyyy'), to_date('09/04/2023','dd/mm/yyyy'), 4.4);
+insert into convocatoriaestudiante values('PSSM', 011, '20210707007', 'FLAU', to_date('02/04/2023','dd/mm/yyyy'), to_date('09/04/2023','dd/mm/yyyy'), 5);
+
 
 --1.10. Incluir 10 empleados de los cuales 6 son docentes, de los cuales 3 trabajaran en esta obra, un director que tambien hizo de evaluador, un coordinador de sinfonica que tambien fue evaluador y un evaluador. Incluir 4 administrativos, de los cuales dos trabajaran en la obra como auxiliar general y como auxiliar de instrumentos.
 

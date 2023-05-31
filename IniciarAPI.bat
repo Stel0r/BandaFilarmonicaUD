@@ -1,3 +1,3 @@
 cd API
 call api-env\Scripts\activate.bat
-uvicorn main:app --reload
+py -m uvicorn main:app --reload

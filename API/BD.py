@@ -56,13 +56,14 @@ class ConexionBD:
         oracledb.init_oracle_client()
         connection = oracledb.connect(user= ConexionBD.user, password=ConexionBD.password,host="localhost", port=1521, service_name="xe")
         cursor = connection.cursor()
-        cursor.execute("select e.codEstudiante, e.nombre ||' '|| e.apellido, con.idinstrumento, con.idobra, f.nomUnidad, c.nomUnidad, i.nomInstrumento, cal.conseccalendario + 1 " +
+        cursor.execute("select e.codEstudiante, e.nombre ||' '|| e.apellido, con.idinstrumento, con.idobra ,f.nomUnidad, c.nomUnidad, i.nomInstrumento, cal.conseccalendario + 1 " +
                         "from estudiante e, unidad f, unidad c, convocatoriaEstudiante con, instrumento i, calendario cal " +
-                        "where c.codunidad = e.codunidad and f.codunidad = c.uni_codunidad and " + 
+                        "where c.codunidad = e.codunidad and f.codunidad = c.uni_codunidad and " +
                         "i.idInstrumento = con.idInstrumento and e.codEstudiante = con.codEstudiante and " +
                         "cal.conseccalendario like " +
-                        "(select distinct cal.conseccalendario from calendario cal, convocatoriaestudiante cov " +
+                        "(select distinct max(cal.conseccalendario) from calendario cal, convocatoriaestudiante cov " +
                         "where TO_DATE(cal.fechainicio, 'dd/mm/yyyy') like TO_DATE(cov.fechainicio, 'dd/mm/yyyy')) " +
+                        "and cal.idobra like con.idobra " +
                         "order by con.calificacion desc")
         result = cursor.fetchall()
         connection.close()
@@ -83,7 +84,6 @@ class ConexionBD:
         connection.close()
         return result
 
-
     def obtenerSeleccionados(periodo:str):
         oracledb.init_oracle_client()
         connection = oracledb.connect(user= ConexionBD.user, password=ConexionBD.password,host="localhost", port=1521, service_name="xe")
@@ -98,7 +98,7 @@ class ConexionBD:
         oracledb.init_oracle_client()
         connection = oracledb.connect(user= ConexionBD.user, password=ConexionBD.password,host="localhost", port=1521, service_name="xe")
         cursor = connection.cursor()
-        cursor.execute("select distinct o.idperiodo from  obra o, calendario c " +
+        cursor.execute("select distinct max(o.idperiodo) from  obra o, calendario c " +
                         "where c.idobra = o.idobra and " + 
                         "(o.idperiodo, c.conseccalendario) in (select o.idperiodo , max(c.conseccalendario) from obra o, calendario c " + 
                         "where c.idobra = o.idobra and lower(c.idtipocalen) like 'en' group by o.idperiodo) " +
@@ -113,7 +113,9 @@ class ConexionBD:
         cursor = connection.cursor()
         cursor.execute("select r26.idInstrumento, r26.num from relationship_26 r26 where r26.idobra like " +
                         "(select distinct cal.idobra from calendario cal, convocatoriaestudiante cov " +
-                        "where TO_DATE(cal.fechainicio, 'dd/mm/yyyy') like TO_DATE(cov.fechainicio, 'dd/mm/yyyy'))")
+                        "where TO_DATE(cal.fechainicio, 'dd/mm/yyyy') like TO_DATE(cov.fechainicio, 'dd/mm/yyyy') and cal.conseccalendario like " +
+                        "(select distinct max(cal.conseccalendario) from calendario cal, convocatoriaestudiante cov " + 
+                        "where TO_DATE(cal.fechainicio, 'dd/mm/yyyy') like TO_DATE(cov.fechainicio, 'dd/mm/yyyy')))")
         result = cursor.fetchall()
         connection.close()
         return result
