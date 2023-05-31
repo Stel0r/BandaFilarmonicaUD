@@ -48,6 +48,22 @@ export class CalendarioService {
     return undefined
   }
 
+  liquidacionValida(){
+    if (this.eventosAhora.length != 0 || this.calendario.length == 0){
+      return false
+    }else{
+      let hoy = new Date()
+      for (let e of this.calendario.reverse()){
+        if (e.tipoEvento == "Ensayo" || e.tipoEvento == "Funcion"){
+          if(e.fechaF > hoy){
+            return false
+          }
+        }
+      }
+    }
+    return true
+  }
+
   estadoPlaneacion() {
     for (let e of this.calendario) {
       if (e.idTipoCalen === "PA") {

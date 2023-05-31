@@ -52,6 +52,10 @@ export class AdminComponent {
     }else return false
   }
 
+  habilitarLiquidacion(){
+    console.log(this.calenService.liquidacionValida())
+    return !this.calenService.liquidacionValida()
+  }
 
 
 }

@@ -26,6 +26,7 @@
         <button
           class="btn btn-primary boton-menu"
           [routerLink]="['Liquidacion']"
+          [disabled] = "this.habilitarLiquidacion()"
         >
           Liquidacion Estudiantes
         </button>
