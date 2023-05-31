@@ -82,10 +82,10 @@ export class LiquidacionEstudianteComponent {
     Notiflix.Loading.standard('Enviando Correo')
 
     for(let estudiante of this.listaLiquidacion){
-      if(estudiante[4] == this.horas){
+      if(estudiante[4] >= this.horas){
         let parametros = {
-          asunto: "Electiva cursada en el grupo SinfonicaUD - periodo XXXX",
-          contenidos: "El estudiante " + estudiante[0] + " curso la electiva participacion sinfonicaUD durante el periodo XXXX",
+          asunto: "Electiva cursada en el grupo SinfonicaUD - periodo " + this.periodo,
+          contenidos: "El estudiante " + estudiante[0] + " curso la electiva participacion sinfonicaUD durante el periodo " + this.periodo,
           remitente: estudiante[3]
         }
         this.http.post("http://127.0.0.1:8000/enviarCorreo",parametros).subscribe(

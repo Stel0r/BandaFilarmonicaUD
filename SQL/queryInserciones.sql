@@ -85,7 +85,7 @@ insert into calendario values('PSSM','EN',0036,'Inactivo',to_date('17/05/2023 4:
 insert into calendario values('PSSM','EN',0037,'Inactivo',to_date('20/05/2023 4:00 PM', 'dd/mm/yyyy HH:MI AM'),to_date('20/05/2023 06:00 PM', 'dd/mm/yyyy HH:MI AM'));
 insert into calendario values('PSSM','EN',0038,'Inactivo',to_date('24/05/2023 4:00 PM', 'dd/mm/yyyy HH:MI AM'),to_date('24/05/2023 06:00 PM', 'dd/mm/yyyy HH:MI AM'));
 insert into calendario values('PSSM','EN',0039,'Inactivo',to_date('27/05/2023 4:00 PM', 'dd/mm/yyyy HH:MI AM'),to_date('27/05/2023 06:00 PM', 'dd/mm/yyyy HH:MI AM'));
-insert into calendario values('PSSM','EN',0040,'Activo',to_date('31/05/2023 4:00 PM', 'dd/mm/yyyy HH:MI AM'),to_date('31/05/2023 06:00 PM', 'dd/mm/yyyy HH:MI AM'));
+insert into calendario values('MSIM','EN',0040,'Activo',to_date('31/05/2023 1:00 PM', 'dd/mm/yyyy HH:MI AM'),to_date('31/05/2023 03:00 PM', 'dd/mm/yyyy HH:MI AM'));
 insert into calendario values('PSSM','EN',0041,'Activo',to_date('03/06/2023 4:00 PM', 'dd/mm/yyyy HH:MI AM'),to_date('03/06/2023 06:00 PM', 'dd/mm/yyyy HH:MI AM'));
 
 --funciones
